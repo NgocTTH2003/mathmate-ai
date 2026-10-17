@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MathMate | Học Toán cùng AI</title>
+<meta name="theme-color" content="#0E0B26">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="MathMate, trang chủ"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <nav class="nav-links" aria-label="Điều hướng chính"><a href="index.html" aria-current="page">Trang chủ</a><a href="khoa-hoc.html">Khóa học</a><a href="luyen-tap.html">Luyện tập</a><a href="tong-quan.html">Góc học tập</a><button type="button" data-soon="Không gian giáo viên">Giáo viên <span class="soon">Sắp ra mắt</span></button></nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="dang-nhap.html">Đăng nhập</a><a class="btn btn-primary btn-sm" href="dang-nhap.html#dang-ky">Tạo tài khoản</a></div>
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<main>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill">Toán 11 đã mở, học miễn phí</span>
+      <h1>Học Toán với một người bạn chấm bài từng bước</h1>
+      <p class="lead">Bài giảng ngắn, bài luyện tập chấm điểm ngay và lời giải chỉ rõ bạn sai ở bước nào. Dành cho học sinh lớp 9 đến 12.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="khoa-hoc.html">Bắt đầu học Toán 11</a>
+        <a class="btn btn-ghost btn-lg" href="luyen-tap.html">Làm thử một bài luyện tập</a>
+      </div>
+      <p class="hero-note">Không cần cài đặt. Học trên máy tính hoặc điện thoại.</p>
+    </div>
+
+    <div class="panel solve" aria-label="Ví dụ MathMate chấm một bài giải">
+      <div class="solve-top"><b>Bài làm của bạn</b><span>MathMate đang chấm</span></div>
+      <div class="solve-q">Giải phương trình \(2\sin x - \sqrt{3} = 0\)</div>
+      <ol class="steps">
+        <li class="step ok"><span class="step-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><div class="step-math">\(\sin x = \dfrac{\sqrt{3}}{2}\)</div><div class="step-note">Chuyển vế và chia hai vế cho 2, chính xác.</div></div></li>
+        <li class="step ok"><span class="step-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><div class="step-math">\(\sin x = \sin\dfrac{\pi}{3}\)</div><div class="step-note">Nhận ra góc đặc biệt, rất tốt.</div></div></li>
+        <li class="step ok"><span class="step-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><div class="step-math">\(x = \dfrac{\pi}{3} + k2\pi,\ k\in\mathbb{Z}\)</div><div class="step-note">Họ nghiệm thứ nhất đúng.</div></div></li>
+        <li class="step warn"><span class="step-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 7v6M12 17h.01"/></svg></span><div><div class="step-math">\(x = \pi - \dfrac{\pi}{3} + k2\pi = \dfrac{2\pi}{3} + k2\pi\)</div><div class="step-note">Bạn còn thiếu họ nghiệm này. Nhớ: \(\sin x = \sin\alpha\) luôn cho hai họ nghiệm.</div></div></li>
+      </ol>
+      <div class="solve-score"><small>Điểm gợi ý</small><b class="grad-text">0,75 / 1</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="lop-hoc">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Chọn lớp của bạn</h2>
+      <p>Toán 11 đang mở để học thử. Các lớp còn lại sẽ lần lượt ra mắt.</p>
+    </div>
+    <div class="grades">
+      <a class="panel grade-main" href="khoa-hoc.html">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div><div class="big grad-text">11</div><h3 style="margin-top:10px">Toán lớp 11</h3><p>9 chương theo chương trình mới. Chương 1 đã có bài học và luyện tập.</p></div>
+          <span class="pill pill-mint">Đang mở</span>
+        </div>
+        <ul class="chapter-peek">
+          <li><span>1</span>Hàm số lượng giác và phương trình lượng giác</li>
+          <li><span>2</span>Dãy số, cấp số cộng và cấp số nhân</li>
+          <li><span>4</span>Quan hệ song song trong không gian</li>
+          <li><span>5</span>Giới hạn, hàm số liên tục</li>
+          <li><span>6</span>Hàm số mũ và hàm số lôgarit</li>
+          <li><span>9</span>Đạo hàm</li>
+        </ul>
+        <span class="btn btn-primary" style="align-self:flex-start">Vào khóa học</span>
+      </a>
+      <div class="grade-list">
+        <button class="grade-row is-soon" type="button" data-soon="Toán lớp 12"><b>12</b><div><h3>Toán lớp 12</h3><p>Ôn thi tốt nghiệp THPT</p></div><span class="soon">Sắp ra mắt</span></button>
+        <button class="grade-row is-soon" type="button" data-soon="Toán lớp 10"><b>10</b><div><h3>Toán lớp 10</h3><p>Nền tảng cho cấp 3</p></div><span class="soon">Sắp ra mắt</span></button>
+        <button class="grade-row is-soon" type="button" data-soon="Toán lớp 9"><b>9</b><div><h3>Toán lớp 9</h3><p>Ôn thi vào lớp 10</p></div><span class="soon">Sắp ra mắt</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Luyện đúng dạng câu của đề thi</h2>
+      <p>Ba dạng câu trong đề thi tốt nghiệp THPT môn Toán được chấm ngay khi bạn nộp bài, kèm lời giải.</p>
+    </div>
+    <div class="qtypes">
+      <div class="panel qtype">
+        <div class="qtype-head"><h3>Trắc nghiệm nhiều lựa chọn</h3><span class="pill pill-mint">Chấm ngay</span></div>
+        <p>Chọn một trong bốn đáp án.</p>
+        <div class="demo">Chu kỳ của hàm số \(y=\sin 2x\) là
+          <div class="demo-opts"><span class="demo-opt">A. \(2\pi\)</span><span class="demo-opt pick">B. \(\pi\)</span><span class="demo-opt">C. \(\dfrac{\pi}{2}\)</span><span class="demo-opt">D. \(4\pi\)</span></div>
+        </div>
+      </div>
+      <div class="panel qtype">
+        <div class="qtype-head"><h3>Đúng hoặc sai</h3><span class="pill pill-mint">Chấm ngay</span></div>
+        <p>Mỗi câu có bốn ý, bạn xét từng ý đúng hay sai.</p>
+        <div class="demo">
+          <div class="demo-tf"><span>a) \(y=\cos x\) là hàm số chẵn</span><span class="tf-tag d">Đúng</span></div>
+          <div class="demo-tf"><span>b) \(y=\cos x\) tuần hoàn với chu kỳ \(\pi\)</span><span class="tf-tag s">Sai</span></div>
+        </div>
+      </div>
+      <div class="panel qtype">
+        <div class="qtype-head"><h3>Trả lời ngắn</h3><span class="pill pill-mint">Chấm ngay</span></div>
+        <p>Tính ra kết quả và điền một con số.</p>
+        <div class="demo">Giá trị lớn nhất của \(y = 3\sin x + 1\) là
+          <div class="demo-ans"><span>4</span></div>
+        </div>
+      </div>
+      <div class="panel qtype is-soon">
+        <div class="qtype-head"><h3>Tự luận</h3><span class="soon">Sắp ra mắt</span></div>
+        <p>Gõ lời giải từng bước với bảng ký hiệu toán. MathMate chỉ ra bước sai và gợi ý cách sửa, giáo viên duyệt điểm.</p>
+        <button class="btn btn-ghost btn-sm" style="align-self:flex-start" type="button" data-soon="Làm bài tự luận">Xem trước</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap teacher">
+    <div class="section-head" style="margin:0">
+      <h2>Dành cho giáo viên</h2>
+      <p>Những công cụ giúp thầy cô soạn đề, giao bài và chấm bài nhanh hơn. Chúng tôi đang xây dựng và sẽ mở dần trong năm tới.</p>
+      <button class="btn btn-ghost" style="margin-top:24px" type="button" data-soon="Đăng ký nhận tin cho giáo viên">Nhận tin khi ra mắt</button>
+    </div>
+    <ul class="tools">
+      <li><div><h3>Ngân hàng câu hỏi</h3><p>Lưu câu hỏi theo chương, bài và mức độ. Tải đề Word hoặc PDF lên để tách câu tự động.</p></div><span class="soon">Sắp ra mắt</span></li>
+      <li><div><h3>Tạo đề theo ma trận</h3><p>Chọn số câu từng mức độ, hệ thống bốc câu hoặc nhờ AI sinh câu tương tự.</p></div><span class="soon">Sắp ra mắt</span></li>
+      <li><div><h3>Lớp học và giao bài</h3><p>Tạo mã lớp, giao đề kèm hạn nộp, theo dõi ai đã làm.</p></div><span class="soon">Sắp ra mắt</span></li>
+      <li><div><h3>Chấm tự luận có AI hỗ trợ</h3><p>AI đề xuất điểm theo thang điểm của thầy cô, thầy cô duyệt trước khi công bố.</p></div><span class="soon">Sắp ra mắt</span></li>
+      <li><div><h3>Thống kê lớp</h3><p>Xem câu nào cả lớp sai nhiều nhất để biết cần giảng lại phần nào.</p></div><span class="soon">Sắp ra mắt</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" style="padding-top:24px">
+  <div class="wrap">
+    <div class="panel cta-end">
+      <h2>Bắt đầu với chương đầu tiên của Toán 11</h2>
+      <p>Học bài phương trình lượng giác cơ bản, rồi làm bài luyện tập 8 câu để biết mình đang ở đâu.</p>
+      <div class="hero-actions" style="justify-content:center;margin-top:8px">
+        <a class="btn btn-primary btn-lg" href="bai-hoc.html">Học thử một bài</a>
+        <a class="btn btn-ghost btn-lg" href="dang-nhap.html#dang-ky">Tạo tài khoản miễn phí</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <div class="footer-links">
+      <a href="khoa-hoc.html">Khóa học</a>
+      <button type="button" data-soon="Trang giới thiệu">Giới thiệu</button>
+      <button type="button" data-soon="Chính sách quyền riêng tư">Quyền riêng tư</button>
+      <button type="button" data-soon="Liên hệ">Liên hệ</button>
+    </div>
+    <p>© 2026 MathMate. Học Toán miễn phí cho học sinh Việt Nam.</p>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phương trình lượng giác cơ bản | MathMate</title>
+<meta name="theme-color" content="#0E0B26">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="MathMate, trang chủ"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <nav class="nav-links" aria-label="Điều hướng chính"><a href="index.html">Trang chủ</a><a href="khoa-hoc.html" aria-current="page">Khóa học</a><a href="luyen-tap.html">Luyện tập</a><a href="tong-quan.html">Góc học tập</a><button type="button" data-soon="Không gian giáo viên">Giáo viên <span class="soon">Sắp ra mắt</span></button></nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="dang-nhap.html">Đăng nhập</a><a class="btn btn-primary btn-sm" href="dang-nhap.html#dang-ky">Tạo tài khoản</a></div>
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<main>
+
+<div class="lesson-layout">
+  <aside class="side" aria-label="Bài học trong chương 1">
+    <h2>Chương 1</h2>
+    <button type="button" class="is-soon" data-soon="Bài 1"><span class="n">1</span>Giá trị lượng giác của góc lượng giác</button>
+    <button type="button" class="is-soon" data-soon="Bài 2"><span class="n">2</span>Công thức lượng giác</button>
+    <button type="button" class="is-soon" data-soon="Bài 3"><span class="n">3</span>Hàm số lượng giác</button>
+    <a href="bai-hoc.html" aria-current="page"><span class="n">4</span>Phương trình lượng giác cơ bản</a>
+    <a href="luyen-tap.html"><span class="n">✓</span>Luyện tập bài 4</a>
+    <nav class="toc" aria-label="Mục lục bài">
+      <a href="#sin">Phương trình sin x = m</a>
+      <a href="#cos">Phương trình cos x = m</a>
+      <a href="#tan">Phương trình tan x = m, cot x = m</a>
+      <a href="#vidu">Ví dụ</a>
+    </nav>
+  </aside>
+
+  <article class="article">
+    <div class="crumbs"><a href="khoa-hoc.html">Toán 11</a> / Chương 1 / Bài 4</div>
+    <h1>Phương trình lượng giác cơ bản</h1>
+    <p class="lead">Sau bài này, bạn giải được các phương trình dạng \(\sin x = m\), \(\cos x = m\), \(\tan x = m\), \(\cot x = m\) và viết đúng các họ nghiệm.</p>
+
+    <button class="video" type="button" data-soon="Video bài giảng giọng đọc AI">
+      <span class="soon">Sắp ra mắt</span>
+      <div><div class="play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"/></svg></div><p>Video bài giảng, khoảng 12 phút</p><small>Giọng đọc AI, có phụ đề</small></div>
+    </button>
+
+    <section class="art-sec" id="sin">
+      <h2>Phương trình \(\sin x = m\)</h2>
+      <p>Vì \(-1 \le \sin x \le 1\), số nghiệm của phương trình phụ thuộc vào \(m\).</p>
+      <div class="formula">
+        <ul>
+          <li>Nếu \(|m| > 1\): phương trình vô nghiệm.</li>
+          <li>Nếu \(|m| \le 1\): gọi \(\alpha\) là góc sao cho \(\sin\alpha = m\). Khi đó
+          $$\sin x = \sin\alpha \iff \left[\begin{aligned} x &= \alpha + k2\pi \\ x &= \pi - \alpha + k2\pi \end{aligned}\right. \quad (k\in\mathbb{Z})$$</li>
+        </ul>
+      </div>
+      <div class="remember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><p>Phương trình \(\sin x = \sin\alpha\) luôn có <b>hai họ nghiệm</b>. Đây là lỗi hay gặp nhất: chỉ viết họ thứ nhất rồi dừng.</p></div>
+      <p>Các trường hợp đặc biệt nên nhớ:</p>
+      <div class="formula">$$\begin{aligned} \sin x = 0 &\iff x = k\pi \\ \sin x = 1 &\iff x = \frac{\pi}{2} + k2\pi \\ \sin x = -1 &\iff x = -\frac{\pi}{2} + k2\pi \end{aligned}$$</div>
+    </section>
+
+    <section class="art-sec" id="cos">
+      <h2>Phương trình \(\cos x = m\)</h2>
+      <p>Tương tự, phương trình vô nghiệm khi \(|m| > 1\). Khi \(|m| \le 1\), gọi \(\alpha\) là góc sao cho \(\cos\alpha = m\):</p>
+      <div class="formula">$$\cos x = \cos\alpha \iff x = \pm\alpha + k2\pi \quad (k\in\mathbb{Z})$$</div>
+      <div class="formula">$$\begin{aligned} \cos x = 0 &\iff x = \frac{\pi}{2} + k\pi \\ \cos x = 1 &\iff x = k2\pi \\ \cos x = -1 &\iff x = \pi + k2\pi \end{aligned}$$</div>
+    </section>
+
+    <section class="art-sec" id="tan">
+      <h2>Phương trình \(\tan x = m\) và \(\cot x = m\)</h2>
+      <p>Hai phương trình này có nghiệm với mọi \(m\). Chú ý điều kiện xác định: \(\tan x\) cần \(x \ne \frac{\pi}{2} + k\pi\), còn \(\cot x\) cần \(x \ne k\pi\).</p>
+      <div class="formula">$$\begin{aligned} \tan x = \tan\alpha &\iff x = \alpha + k\pi \\ \cot x = \cot\alpha &\iff x = \alpha + k\pi \end{aligned} \qquad (k\in\mathbb{Z})$$</div>
+      <div class="remember"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg><p>Với \(\tan\) và \(\cot\), chu kỳ là \(\pi\) nên họ nghiệm dùng \(k\pi\), không phải \(k2\pi\).</p></div>
+    </section>
+
+    <section class="art-sec" id="vidu">
+      <h2>Ví dụ</h2>
+      <div class="example"><div class="example-q"><b>Ví dụ 1.</b>Giải phương trình \(\sin x = \dfrac{1}{2}\).</div>
+<button class="reveal" type="button" aria-expanded="false" aria-controls="sol1">Xem lời giải <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="example-a" id="sol1" hidden>Ta có \(\dfrac{1}{2} = \sin\dfrac{\pi}{6}\), nên $$\sin x = \sin\frac{\pi}{6} \iff \left[\begin{aligned} x &= \frac{\pi}{6} + k2\pi \\ x &= \pi - \frac{\pi}{6} + k2\pi = \frac{5\pi}{6} + k2\pi \end{aligned}\right. \quad (k\in\mathbb{Z})$$</div></div>
+      <div class="example"><div class="example-q"><b>Ví dụ 2.</b>Giải phương trình \(\cos 2x = -\dfrac{\sqrt{2}}{2}\).</div>
+<button class="reveal" type="button" aria-expanded="false" aria-controls="sol2">Xem lời giải <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="example-a" id="sol2" hidden>Ta có \(-\dfrac{\sqrt{2}}{2} = \cos\dfrac{3\pi}{4}\), nên $$\cos 2x = \cos\frac{3\pi}{4} \iff 2x = \pm\frac{3\pi}{4} + k2\pi \iff x = \pm\frac{3\pi}{8} + k\pi \quad (k\in\mathbb{Z})$$ Chú ý: chia cả \(k2\pi\) cho 2 thành \(k\pi\).</div></div>
+      <div class="example"><div class="example-q"><b>Ví dụ 3.</b>Giải phương trình \(\tan\left(x - \dfrac{\pi}{4}\right) = \sqrt{3}\).</div>
+<button class="reveal" type="button" aria-expanded="false" aria-controls="sol3">Xem lời giải <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="example-a" id="sol3" hidden>Ta có \(\sqrt{3} = \tan\dfrac{\pi}{3}\), nên $$x - \frac{\pi}{4} = \frac{\pi}{3} + k\pi \iff x = \frac{7\pi}{12} + k\pi \quad (k\in\mathbb{Z})$$ Nghiệm này thỏa điều kiện \(x - \frac{\pi}{4} \ne \frac{\pi}{2} + k\pi\).</div></div>
+    </section>
+
+    <div class="panel lesson-end">
+      <div><h3>Bạn đã sẵn sàng?</h3><p>8 câu theo ba dạng của đề thi, chấm điểm ngay khi nộp.</p></div>
+      <a class="btn btn-primary btn-lg" href="luyen-tap.html">Làm bài luyện tập</a>
+    </div>
+  </article>
+</div>
+<button class="btn btn-primary ask" type="button" data-soon="Hỏi MathMate về bài này"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19.5 9l-5.7 1.4L12 16l-1.8-5.6L4.5 9l5.7-1.4z"/><path d="M19 15l.9 2.6L22.5 18l-2.6.9L19 21.5l-.9-2.6L15.5 18l2.6-.4z"/></svg> Hỏi MathMate</button>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <div class="footer-links">
+      <a href="khoa-hoc.html">Khóa học</a>
+      <button type="button" data-soon="Trang giới thiệu">Giới thiệu</button>
+      <button type="button" data-soon="Chính sách quyền riêng tư">Quyền riêng tư</button>
+      <button type="button" data-soon="Liên hệ">Liên hệ</button>
+    </div>
+    <p>© 2026 MathMate. Học Toán miễn phí cho học sinh Việt Nam.</p>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+<script>
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click',function(){
+    var open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',!open);
+    b.firstChild.textContent=open?'Xem lời giải ':'Ẩn lời giải ';
+    document.getElementById(b.getAttribute('aria-controls')).hidden=open;
+  });
+});
+</script>
+</body>
+</html>
