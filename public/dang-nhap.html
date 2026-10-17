@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Đăng nhập | MathMate</title>
 <meta name="theme-color" content="#0E0B26">
+<link rel="icon" type="image/svg+xml" href="assets/img/mathmate-bot.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/style.css">
@@ -212,7 +213,7 @@
     // BẢN XEM TRƯỚC: tìm tài khoản đã "đăng ký" trên trình duyệt này
     var em=val('login-email').toLowerCase(),u=users()[em];
     if(!u)u={name:em.split('@')[0],email:em,role:'student',grade:'11'};
-    MM.setUser(u);
+    MM.setUser(u);MM.track('login');
     toast('Đăng nhập thành công (bản xem trước). Đang mở trang của bạn…','ok');
     setTimeout(function(){location.href='tong-quan.html'},1100);
   });
@@ -232,7 +233,7 @@
     var u={name:val('su-name'),email:val('su-email').toLowerCase(),role:r};
     if(r==='student')u.grade=g.value;else{u.school=val('su-school');u.teach=document.getElementById('su-teach').value;u.approved=false}
     var all=users();all[u.email]=u;try{localStorage.setItem('mm_users',JSON.stringify(all))}catch(e){}
-    MM.setUser(u);
+    MM.setUser(u);MM.track('signup');
     toast('Tạo tài khoản thành công (bản xem trước, chưa gửi mã xác nhận email).','ok');
     setTimeout(function(){location.href='tong-quan.html'},1300);
   });

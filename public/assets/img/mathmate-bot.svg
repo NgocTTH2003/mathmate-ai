@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="MathMate, trợ lý AI học Toán">
+  <style>
+    .halo{animation:breathe 4s ease-in-out infinite}
+    .float{animation:float 3.6s ease-in-out infinite}
+    .eyes{transform-box:fill-box;transform-origin:center;animation:blink 4.5s ease-in-out infinite}
+    .orb{transform-box:fill-box;transform-origin:center;animation:pulse 2.4s ease-in-out infinite}
+    .shine{animation:sweep 5s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.6px)}}
+    @keyframes blink{0%,44%,50%,100%{transform:scaleY(1)}47%{transform:scaleY(.15)}}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+    @keyframes breathe{0%,100%{opacity:.35}50%{opacity:.6}}
+    @keyframes sweep{0%,55%{transform:translateX(-70px)}85%,100%{transform:translateX(70px)}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+  </style>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3D8BFF"/><stop offset=".5" stop-color="#7C5CFF"/><stop offset="1" stop-color="#FF6BC8"/>
+    </linearGradient>
+    <radialGradient id="ink" cx=".5" cy=".35" r=".75">
+      <stop offset="0" stop-color="#2A2170"/><stop offset=".6" stop-color="#17123F"/><stop offset="1" stop-color="#0E0B26"/>
+    </radialGradient>
+    <linearGradient id="pearl" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#E9E3FF"/><stop offset="1" stop-color="#B9A8FF"/>
+    </linearGradient>
+    <linearGradient id="visor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B2368"/><stop offset="1" stop-color="#0B0920"/>
+    </linearGradient>
+    <linearGradient id="eye" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6FE3FF"/><stop offset=".5" stop-color="#A98BFF"/><stop offset="1" stop-color="#FF8AD8"/>
+    </linearGradient>
+    <linearGradient id="pod" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7C5CFF"/><stop offset="1" stop-color="#FF6BC8"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <clipPath id="c"><circle cx="60" cy="60" r="57"/></clipPath>
+    <clipPath id="visorClip"><rect x="34" y="40" width="52" height="37" rx="17"/></clipPath>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- nền: vòng tròn tối, viền gradient -->
+  <circle cx="60" cy="60" r="59" fill="url(#brand)"/>
+  <circle cx="60" cy="60" r="57" fill="url(#ink)"/>
+  <g clip-path="url(#c)">
+    <!-- quầng sáng phía sau -->
+    <circle class="halo" cx="60" cy="58" r="34" fill="#7C5CFF" opacity=".45" filter="url(#soft)"/>
+    <circle cx="80" cy="40" r="16" fill="#FF6BC8" opacity=".25" filter="url(#soft)"/>
+
+    <!-- vai -->
+    <path d="M24 124 C24 101 39 92 60 92 C81 92 96 101 96 124 Z" fill="url(#pearl)"/>
+    <path d="M34 104 C42 97 52 95 60 95" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".7" fill="none"/>
+    <!-- huy hiệu logo MathMate -->
+    <rect x="50" y="101" width="20" height="16" rx="6" fill="url(#brand)"/>
+    <g transform="translate(53.2 102.6) scale(.57)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/>
+    </g>
+    <!-- cổ -->
+    <rect x="53" y="84" width="14" height="10" rx="4" fill="#3A2F86"/>
+  </g>
+
+  <g class="float">
+  <!-- ăng-ten phát sáng -->
+  <path d="M60 27 V17" stroke="#CFC4FF" stroke-width="2.2" stroke-linecap="round"/>
+  <circle class="orb" cx="60" cy="14" r="4.2" fill="#FF8AD8" filter="url(#glow)"/>
+
+  <!-- tai nghe -->
+  <rect x="19" y="49" width="12" height="24" rx="6" fill="url(#pod)"/>
+  <rect x="89" y="49" width="12" height="24" rx="6" fill="url(#pod)"/>
+  <rect x="21.5" y="55" width="3" height="12" rx="1.5" fill="#fff" opacity=".55"/>
+  <rect x="95.5" y="55" width="3" height="12" rx="1.5" fill="#fff" opacity=".35"/>
+
+  <!-- đầu ngọc trai -->
+  <rect x="27" y="26" width="66" height="61" rx="28" fill="url(#pearl)"/>
+  <ellipse cx="45" cy="34" rx="14" ry="5" fill="#fff" opacity=".85" transform="rotate(-14 45 34)"/>
+  <path d="M86 38 C92 46 93 62 89 74" stroke="#FF8AD8" stroke-width="2" stroke-linecap="round" fill="none" opacity=".55"/>
+
+  <!-- kính mặt -->
+  <rect x="34" y="40" width="52" height="37" rx="17" fill="url(#visor)"/>
+  <rect x="34" y="40" width="52" height="37" rx="17" fill="none" stroke="#7C5CFF" stroke-opacity=".5" stroke-width="1"/>
+  <path d="M40 46 Q52 42 66 43" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".16" fill="none"/>
+  <g clip-path="url(#visorClip)"><g transform="skewX(-20)"><rect class="shine" x="62" y="30" width="18" height="60" fill="url(#streak)"/></g></g>
+
+  <!-- mắt cười phát sáng + lông mi -->
+  <g class="eyes" filter="url(#glow)" fill="none" stroke="url(#eye)" stroke-linecap="round">
+    <path d="M43 59 Q48 52.5 53 59" stroke-width="3.2"/>
+    <path d="M67 59 Q72 52.5 77 59" stroke-width="3.2"/>
+    <path d="M43.2 55.2 l-2.6 -2.2" stroke-width="1.5"/>
+    <path d="M76.8 55.2 l2.6 -2.2" stroke-width="1.5"/>
+  </g>
+  <!-- má hồng -->
+  <ellipse cx="43" cy="66" rx="4.2" ry="2.2" fill="#FF6BC8" opacity=".5"/>
+  <ellipse cx="77" cy="66" rx="4.2" ry="2.2" fill="#FF6BC8" opacity=".5"/>
+  <!-- miệng -->
+  <path d="M55 65.5 Q60 70.5 65 65.5" stroke="url(#eye)" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  </g>
+</svg>

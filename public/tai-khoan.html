@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tài khoản | MathMate</title>
+<meta name="theme-color" content="#0E0B26">
+<link rel="icon" type="image/svg+xml" href="assets/img/mathmate-bot.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="MathMate, trang chủ"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <nav class="nav-links" aria-label="Điều hướng chính"><a href="index.html">Trang chủ</a><a href="khoa-hoc.html">Khóa học</a><a href="luyen-tap.html">Luyện tập</a><a href="tong-quan.html">Góc học tập</a><button type="button" data-soon="Không gian giáo viên">Giáo viên <span class="soon">Sắp ra mắt</span></button></nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="dang-nhap.html">Đăng nhập</a><a class="btn btn-primary btn-sm" href="dang-nhap.html#dang-ky">Tạo tài khoản</a></div>
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<main>
+
+<div class="wrap">
+  <div id="need-login" class="panel cta-end" style="margin:48px 0" hidden>
+    <h2>Bạn chưa đăng nhập</h2>
+    <p>Đăng nhập để xem và chỉnh sửa tài khoản của bạn.</p>
+    <a class="btn btn-primary btn-lg" href="dang-nhap.html">Đăng nhập</a>
+  </div>
+
+  <div class="acct" id="acct" hidden>
+    <nav class="acct-nav" aria-label="Mục tài khoản">
+      <a href="#ho-so">Hồ sơ của tôi</a>
+      <a href="#mat-khau">Đổi mật khẩu</a>
+      <a href="#lien-ket">Tài khoản liên kết</a>
+      <a href="#bao-mat">Bảo mật và thiết bị</a>
+    </nav>
+    <div>
+      <section class="panel acct-sec" id="ho-so">
+        <h2>Hồ sơ của tôi</h2>
+        <p>Thông tin này giúp MathMate gợi ý bài học phù hợp với bạn.</p>
+        <div class="profile-top"><span class="avatar" id="pf-avatar"></span><div><b id="pf-name" style="font-size:1.1rem"></b><p class="small" id="pf-role"></p></div></div>
+        <form class="acct-form" id="form-profile" novalidate>
+          <div class="field"><label for="pf-in-name">Họ và tên</label><input class="input" id="pf-in-name" autocomplete="name" required><span class="error-msg" data-for="pf-in-name"></span></div>
+          <div class="field"><label for="pf-email">Email</label><input class="input" id="pf-email" type="email" readonly><span class="hint">Đổi email sắp ra mắt.</span></div>
+          <fieldset class="field" id="pf-student" style="border:0" hidden>
+            <legend style="font-size:.88rem;font-weight:600;margin-bottom:7px">Lớp đang học</legend>
+            <div class="grade-pick">
+              <label><input type="radio" name="pf-grade" value="9">9</label><label><input type="radio" name="pf-grade" value="10">10</label>
+              <label><input type="radio" name="pf-grade" value="11">11</label><label><input type="radio" name="pf-grade" value="12">12</label>
+            </div>
+          </fieldset>
+          <div id="pf-teacher" hidden>
+            <div class="field"><label for="pf-school">Trường đang dạy</label><input class="input" id="pf-school" autocomplete="organization"><span class="error-msg" data-for="pf-school"></span></div>
+          </div>
+          <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+        </form>
+      </section>
+
+      <section class="panel acct-sec" id="mat-khau">
+        <h2>Đổi mật khẩu</h2>
+        <p>Mật khẩu mới cần ít nhất 8 ký tự, có cả chữ và số.</p>
+        <form class="acct-form" id="form-pw" novalidate>
+          <input type="text" id="pw-user" autocomplete="username" hidden>
+          <div class="field"><label for="pw-cur">Mật khẩu hiện tại</label><div class="pw-wrap"><input class="input" id="pw-cur" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu hiện tại" required><button class="pw-toggle" type="button" aria-label="Hiện mật khẩu" data-target="pw-cur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="error-msg" data-for="pw-cur"></span></div>
+          <div class="field"><label for="pw-new">Mật khẩu mới</label><div class="pw-wrap"><input class="input" id="pw-new" type="password" autocomplete="new-password" placeholder="Ít nhất 8 ký tự, có chữ và số" required><button class="pw-toggle" type="button" aria-label="Hiện mật khẩu" data-target="pw-new"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="error-msg" data-for="pw-new"></span></div>
+          <div class="pw-meter" id="pw-meter" data-level="0" aria-hidden="true" style="margin:-10px 0 16px"><i></i><i></i><i></i><i></i></div>
+          <div class="field"><label for="pw-new2">Nhập lại mật khẩu mới</label><div class="pw-wrap"><input class="input" id="pw-new2" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu mới" required><button class="pw-toggle" type="button" aria-label="Hiện mật khẩu" data-target="pw-new2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="error-msg" data-for="pw-new2"></span></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+            <button class="btn btn-primary" type="submit">Đổi mật khẩu</button>
+            <button class="link" type="button" data-soon="Quên mật khẩu">Quên mật khẩu hiện tại?</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel acct-sec" id="lien-ket">
+        <h2>Tài khoản liên kết</h2>
+        <p>Liên kết với Google để đăng nhập nhanh bằng một cú bấm.</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span><b>Google</b> <span class="small">Chưa liên kết</span></span>
+          <button class="btn btn-ghost btn-sm" type="button" data-soon="Liên kết Google">Liên kết</button>
+        </div>
+      </section>
+
+      <section class="panel acct-sec" id="bao-mat">
+        <h2>Bảo mật và thiết bị</h2>
+        <p>Xem các thiết bị đang đăng nhập và đăng xuất khỏi tất cả khi cần.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" type="button" data-soon="Danh sách thiết bị đăng nhập">Xem thiết bị</button>
+          <button class="btn btn-ghost btn-sm" type="button" data-soon="Đăng xuất khỏi mọi thiết bị">Đăng xuất khỏi mọi thiết bị</button>
+        </div>
+      </section>
+
+      <section class="panel acct-sec danger-zone">
+        <h2>Xóa tài khoản</h2>
+        <p>Xóa vĩnh viễn tài khoản cùng toàn bộ tiến độ học và điểm số. Không thể hoàn tác.</p>
+        <button class="btn btn-danger btn-sm" type="button" data-soon="Xóa tài khoản">Xóa tài khoản</button>
+      </section>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <div class="footer-links">
+      <a href="khoa-hoc.html">Khóa học</a>
+      <button type="button" data-soon="Trang giới thiệu">Giới thiệu</button>
+      <button type="button" data-soon="Chính sách quyền riêng tư">Quyền riêng tư</button>
+      <button type="button" data-soon="Liên hệ">Liên hệ</button>
+    </div>
+    <p>© 2026 MathMate. Học Toán miễn phí cho học sinh Việt Nam.</p>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+<script>
+(function(){
+  var u=MM.getUser();
+  if(!u){document.getElementById('need-login').hidden=false;return}
+  document.getElementById('acct').hidden=false;
+
+  function fill(){
+    document.getElementById('pf-avatar').textContent=MM.initials(u.name);
+    document.getElementById('pf-avatar').className='avatar'+(u.role==='teacher'?' t':'');
+    document.getElementById('pf-name').textContent=u.name;
+    document.getElementById('pf-role').textContent=MM.roleLabel(u);
+  }
+  fill();
+  document.getElementById('pf-in-name').value=u.name;
+  document.getElementById('pf-email').value=u.email;
+  document.getElementById('pw-user').value=u.email;
+  var isT=u.role==='teacher';
+  document.getElementById('pf-student').hidden=isT;document.getElementById('pf-teacher').hidden=!isT;
+  if(isT)document.getElementById('pf-school').value=u.school||'';
+  else{var g=document.querySelector('input[name="pf-grade"][value="'+u.grade+'"]');if(g)g.checked=true}
+
+  function setErr(id,msg){
+    var i=document.getElementById(id),m=document.querySelector('.error-msg[data-for="'+id+'"]');
+    if(i){i.classList.toggle('invalid',!!msg);i.setAttribute('aria-invalid',msg?'true':'false')}
+    if(m)m.textContent=msg||'';return !msg;
+  }
+
+  // Lưu hồ sơ
+  document.getElementById('form-profile').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('pf-in-name').value.trim();
+    var ok=setErr('pf-in-name',name.length>=2?'':'Nhập họ và tên của bạn');
+    if(isT)ok=setErr('pf-school',document.getElementById('pf-school').value.trim().length>=3?'':'Nhập tên trường bạn đang dạy')&&ok;
+    if(!ok)return;
+    u.name=name;
+    if(isT)u.school=document.getElementById('pf-school').value.trim();
+    else{var g=document.querySelector('input[name="pf-grade"]:checked');if(g)u.grade=g.value}
+    MM.setUser(u);
+    try{var all=JSON.parse(localStorage.getItem('mm_users'))||{};all[u.email]=Object.assign(all[u.email]||{},u);localStorage.setItem('mm_users',JSON.stringify(all))}catch(e){}
+    fill();
+    var chip=document.querySelector('.who b');if(chip)chip.textContent=u.name;
+    var small=document.querySelector('.who small');if(small)small.textContent=MM.roleLabel(u);
+    toast('Đã lưu hồ sơ','ok');
+  });
+
+  // Hiện/ẩn mật khẩu
+  document.querySelectorAll('.pw-toggle').forEach(function(b){b.onclick=function(){
+    var i=document.getElementById(b.dataset.target),h=i.type==='password';i.type=h?'text':'password';b.setAttribute('aria-label',h?'Ẩn mật khẩu':'Hiện mật khẩu');
+  }});
+  // Độ mạnh mật khẩu
+  var np=document.getElementById('pw-new'),meter=document.getElementById('pw-meter');
+  np.addEventListener('input',function(){
+    var v=np.value,s=0;if(v.length>=8)s++;if(/[a-zA-Z]/.test(v)&&/\d/.test(v))s++;if(/[A-Z]/.test(v)&&/[a-z]/.test(v))s++;if(/[^a-zA-Z0-9]/.test(v)||v.length>=12)s++;
+    meter.dataset.level=v?Math.max(1,s):0;
+  });
+
+  // Đổi mật khẩu (bản xem trước: chỉ kiểm tra, chưa lưu lên máy chủ)
+  document.getElementById('form-pw').addEventListener('submit',function(e){
+    e.preventDefault();
+    var c=document.getElementById('pw-cur').value,n=np.value,n2=document.getElementById('pw-new2').value;
+    var ok=setErr('pw-cur',c?'':'Nhập mật khẩu hiện tại');
+    ok=setErr('pw-new',(n.length>=8&&/[a-zA-Z]/.test(n)&&/\d/.test(n))?'':'Mật khẩu mới cần ít nhất 8 ký tự, có cả chữ và số')&&ok;
+    if(ok&&n===c)ok=setErr('pw-new','Mật khẩu mới phải khác mật khẩu hiện tại');
+    ok=setErr('pw-new2',n&&n===n2?'':'Hai mật khẩu mới chưa khớp')&&ok;
+    if(!ok)return;
+    toast('Bản xem trước: đổi mật khẩu sẽ hoạt động khi có đăng nhập thật.');
+    this.reset();meter.dataset.level=0;
+  });
+
+  // Đánh dấu mục đang xem ở menu trái
+  var links=document.querySelectorAll('.acct-nav a');
+  function mark(){var h=location.hash||'#ho-so';links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('href')===h?'true':'false')})}
+  window.addEventListener('hashchange',mark);mark();
+})();
+</script>
+</body>
+</html>

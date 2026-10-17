@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Làm bài: Phương trình lượng giác cơ bản | MathMate</title>
 <meta name="theme-color" content="#0E0B26">
+<link rel="icon" type="image/svg+xml" href="assets/img/mathmate-bot.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <link rel="stylesheet" href="assets/css/style.css">
@@ -174,14 +175,14 @@
     clearInterval(tick);
     form.classList.add('graded');
     form.querySelectorAll('input').forEach(function(i){if(i.type==='text')i.readOnly=true});
-    var p1=0,p2=0,p3=0,right=0;
+    var p1=0,p2=0,p3=0,right=0,wrong=[];
 
     MCQ.forEach(function(m,i){
       var el=document.getElementById('q'+(i+1)),sel=form.querySelector('input[name="m'+i+'"]:checked');
       var opts=el.querySelectorAll('.opt'),ok=sel&&+sel.value===m.a;
       opts[m.a].classList.add('is-right');
       if(sel&&!ok)opts[+sel.value].classList.add('is-wrong');
-      if(ok){p1+=.25;right++}
+      if(ok){p1+=.25;right++}else wrong.push(i+1);
       el.classList.add(ok?'ok':'bad');verdict(el,ok?'ok':'bad',ok?'Đúng':(sel?'Sai':'Chưa làm'));
       grid.querySelector('[data-q="'+(i+1)+'"]').className=ok?'ok':'bad';
       addExplain(el,'Đáp án '+L[m.a]+'. '+m.e);
@@ -194,7 +195,7 @@
       row.classList.add(ok?'is-right':'is-wrong');
       row.insertAdjacentHTML('beforeend','<span class="tf-verdict">'+(ok?'✓ ':'✗ ')+'Đáp án: '+(it.a?'Đúng':'Sai')+'. '+it.e+'</span>');
     });
-    p2=[0,.1,.25,.5,1][cnt];if(cnt===4)right++;
+    p2=[0,.1,.25,.5,1][cnt];if(cnt===4)right++;else wrong.push(n);
     tfEl.classList.add(cnt===4?'ok':'bad');
     verdict(tfEl,cnt===4?'ok':(cnt>0?'part':'bad'),'Đúng '+cnt+'/4 ý');
     grid.querySelector('[data-q="'+n+'"]').className=cnt===4?'ok':'bad';
@@ -202,7 +203,7 @@
     SHORT.forEach(function(s,i){
       var k=MCQ.length+2+i,el=document.getElementById('q'+k),v=form.elements['s'+i].value;
       var ok=Math.abs(num(v)-s.a)<1e-9;
-      if(ok){p3+=.5;right++}
+      if(ok){p3+=.5;right++}else wrong.push(k);
       el.classList.add(ok?'ok':'bad');verdict(el,ok?'ok':'bad',ok?'Đúng':(v.trim()?'Sai':'Chưa làm'));
       grid.querySelector('[data-q="'+k+'"]').className=ok?'ok':'bad';
       addExplain(el,'Đáp án: <b>'+fmt(s.a)+'</b>. '+s.e);
@@ -218,6 +219,7 @@
     r.hidden=false;
     document.getElementById('submit').hidden=true;
     document.getElementById('retry').hidden=false;
+    MM.track('practice_submit',{set:SET_ID,score:score,ten:Math.round(ten*100)/100,right:right,total:TOTAL,time:document.getElementById('timer').textContent,wrong:wrong});
     if(user){
       var rec={set:SET_ID,score:score,ten:ten,right:right,total:TOTAL,time:document.getElementById('timer').textContent,at:Date.now()};
       try{

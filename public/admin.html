@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản trị | MathMate</title>
+<meta name="theme-color" content="#0E0B26">
+<link rel="icon" type="image/svg+xml" href="assets/img/mathmate-bot.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="MathMate, trang chủ"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <nav class="nav-links" aria-label="Điều hướng chính"><a href="index.html">Trang chủ</a><a href="khoa-hoc.html">Khóa học</a><a href="luyen-tap.html">Luyện tập</a><a href="tong-quan.html">Góc học tập</a><button type="button" data-soon="Không gian giáo viên">Giáo viên <span class="soon">Sắp ra mắt</span></button></nav>
+    <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="dang-nhap.html">Đăng nhập</a><a class="btn btn-primary btn-sm" href="dang-nhap.html#dang-ky">Tạo tài khoản</a></div>
+    <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<main>
+
+<div class="wrap">
+  <!-- ĐĂNG NHẬP ADMIN -->
+  <section class="panel adm-login" id="adm-login">
+    <h1 style="font-size:1.6rem">Trang quản trị</h1>
+    <p>Nhập mật khẩu quản trị để xem báo cáo.</p>
+    <form id="adm-form" novalidate>
+      <div class="field">
+        <label for="adm-pw">Mật khẩu quản trị</label>
+        <input class="input" id="adm-pw" type="password" autocomplete="current-password" required>
+        <span class="error-msg" id="adm-err"></span>
+      </div>
+      <button class="btn btn-primary btn-block btn-lg" type="submit">Vào trang quản trị</button>
+    </form>
+  </section>
+
+  <!-- BẢNG ĐIỀU KHIỂN -->
+  <div id="adm-dash" hidden>
+    <div class="adm-head">
+      <div><p class="small" id="adm-updated"></p><h1>Báo cáo hoạt động</h1></div>
+      <div class="adm-tools">
+        <div class="grade-tabs" role="group" aria-label="Khoảng thời gian">
+          <button type="button" data-days="1" aria-pressed="false">Hôm nay</button>
+          <button type="button" data-days="7" aria-pressed="false">7 ngày</button>
+          <button type="button" data-days="30" aria-pressed="true">30 ngày</button>
+          <button type="button" data-days="90" aria-pressed="false">90 ngày</button>
+        </div>
+        <button class="btn btn-ghost btn-sm" type="button" id="adm-refresh">Làm mới</button>
+        <button class="btn btn-ghost btn-sm" type="button" id="adm-logout">Thoát</button>
+      </div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="adm-grid">
+      <section class="panel span-2"><h2>Lượt truy cập theo ngày</h2><div id="daily"></div></section>
+      <section class="panel"><h2>Đăng ký mới</h2><div id="signups"></div></section>
+      <section class="panel"><h2>Bài luyện tập</h2><div id="practice"></div></section>
+      <section class="panel"><h2>Câu sai nhiều nhất</h2><div id="wrong"></div></section>
+      <section class="panel"><h2>Tính năng được mong chờ</h2><p class="muted" style="margin:-8px 0 12px">Số lượt bấm vào mục “Sắp ra mắt”</p><div id="soon"></div></section>
+      <section class="panel"><h2>Trang được xem nhiều</h2><div id="pages"></div></section>
+      <section class="panel span-2"><h2>Hoạt động gần đây</h2><div class="ev-wrap" id="recent"></div></section>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 9 6l3 7 3-7 5 12"/><path d="M8.5 14h7"/></svg></span>MathMate</a>
+    <div class="footer-links">
+      <a href="khoa-hoc.html">Khóa học</a>
+      <button type="button" data-soon="Trang giới thiệu">Giới thiệu</button>
+      <button type="button" data-soon="Chính sách quyền riêng tư">Quyền riêng tư</button>
+      <button type="button" data-soon="Liên hệ">Liên hệ</button>
+    </div>
+    <p>© 2026 MathMate. Học Toán miễn phí cho học sinh Việt Nam.</p>
+  </div>
+</footer>
+<script src="assets/js/app.js"></script>
+<script>
+(function(){
+  var KEY='mm_admin_pw',days=30;
+  var PAGES={'/':'Trang chủ','/index':'Trang chủ','/khoa-hoc':'Khóa học','/bai-hoc':'Bài học','/luyen-tap':'Chọn bài luyện tập','/lam-bai':'Làm bài','/tong-quan':'Góc học tập','/dang-nhap':'Đăng nhập'};
+  function pageName(p){p=String(p||'/').replace(/\.html$/,'');return PAGES[p]||p}
+  var SET={c1b4:'Bài 4. Phương trình lượng giác cơ bản'};
+  var TYPE={page_view:'Xem trang',signup:'Đăng ký',login:'Đăng nhập',practice_submit:'Nộp bài',soon_click:'Bấm “Sắp ra mắt”'};
+  var ROLE={guest:'Khách',student:'Học sinh',teacher:'Giáo viên'};
+  function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+  function n(v){return (v||0).toLocaleString('vi-VN')}
+  function dec(v){return v==null?'–':String(v).replace('.',',')}
+  function pw(){try{return sessionStorage.getItem(KEY)||''}catch(e){return ''}}
+  function setPw(v){try{v?sessionStorage.setItem(KEY,v):sessionStorage.removeItem(KEY)}catch(e){}}
+
+  function api(path,body){
+    return fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Admin-Password':pw()},body:JSON.stringify(body||{})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(d){if(!r.ok){var e=new Error(d.error||('Lỗi '+r.status));e.status=r.status;throw e}return d})});
+  }
+  function show(dash){document.getElementById('adm-login').hidden=dash;document.getElementById('adm-dash').hidden=!dash}
+
+  function rows(list,label,val,empty){
+    if(!list||!list.length)return '<p class="muted">'+empty+'</p>';
+    var max=Math.max.apply(null,list.map(function(x){return x[val]||0}).concat([1]));
+    return '<ul class="rows">'+list.map(function(x){
+      return '<li><span>'+esc(label(x))+'</span><b>'+n(x[val])+'</b><span class="meter"><i style="width:'+Math.round((x[val]||0)/max*100)+'%"></i></span></li>';
+    }).join('')+'</ul>';
+  }
+
+  function render(d){
+    var o=d.overview||{};
+    var k=[['Lượt xem trang',n(o.views)],['Khách truy cập',n(o.visitors)],['Đăng ký mới',n(o.signups)],['Lượt nộp bài',n(o.submits)],['Điểm trung bình',dec(o.avg_score)+(o.avg_score!=null?'/10':'')],['Bấm “Sắp ra mắt”',n(o.soon_clicks)]];
+    document.getElementById('kpis').innerHTML=k.map(function(x){return '<div class="panel kpi"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>'}).join('');
+
+    var dl=d.daily||[];
+    if(!dl.length)document.getElementById('daily').innerHTML='<p class="muted">Chưa có lượt truy cập nào trong khoảng này.</p>';
+    else{
+      var mx=Math.max.apply(null,dl.map(function(x){return x.visitors}).concat([1]));
+      document.getElementById('daily').innerHTML='<div class="daily">'+dl.map(function(x){
+        var p=x.d.split('-');
+        return '<div class="col" title="'+p[2]+'/'+p[1]+': '+x.visitors+' khách, '+x.views+' lượt xem"><div class="bar2" style="height:'+Math.round(x.visitors/mx*100)+'%"></div><small>'+p[2]+'/'+p[1]+'</small></div>';
+      }).join('')+'</div><div class="legend-row"><span>Chiều cao cột: số khách truy cập mỗi ngày (rê chuột để xem chi tiết)</span></div>';
+    }
+
+    var sr=d.signupsByRole||[],sg=d.signupsByGrade||[];
+    document.getElementById('signups').innerHTML=
+      rows(sr,function(x){return ROLE[x.role]||x.role},'n','Chưa có ai đăng ký.')+
+      (sg.length?'<p class="muted" style="margin:16px 0 10px">Học sinh theo lớp</p>'+rows(sg,function(x){return 'Lớp '+x.grade},'n',''):'');
+
+    var pr=d.practice||[];
+    document.getElementById('practice').innerHTML=!pr.length?'<p class="muted">Chưa có ai nộp bài.</p>':
+      '<ul class="rows">'+pr.map(function(x){
+        return '<li><span>'+esc(SET[x.set_id]||x.set_id)+'</span><b>'+n(x.n)+' lượt</b><span class="muted" style="grid-column:1/-1">Điểm trung bình '+dec(x.avg_score)+'/10, '+n(x.good)+' lượt đạt từ 8 điểm</span></li>';
+      }).join('')+'</ul>';
+
+    document.getElementById('wrong').innerHTML=rows(d.wrongQuestions,function(x){return 'Câu '+x.question+' (Bài 4)'},'n','Chưa có dữ liệu.');
+    document.getElementById('soon').innerHTML=rows(d.soonFeatures,function(x){return x.feature||'Không rõ'},'n','Chưa ai bấm vào tính năng sắp ra mắt.');
+    document.getElementById('pages').innerHTML=rows(d.topPages,function(x){return pageName(x.page)},'n','Chưa có lượt xem.');
+
+    var rc=d.recent||[];
+    document.getElementById('recent').innerHTML=!rc.length?'<p class="muted">Chưa có hoạt động.</p>':
+      '<table class="ev-table"><thead><tr><th>Thời gian</th><th>Hoạt động</th><th>Người dùng</th><th>Chi tiết</th></tr></thead><tbody>'+
+      rc.map(function(x){
+        var dt={};try{dt=JSON.parse(x.data)}catch(e){}
+        var info=x.type==='practice_submit'?('Điểm '+dec(dt.ten)+'/10'):x.type==='soon_click'?(dt.feature||''):(pageName(x.page));
+        var who=(ROLE[x.role]||x.role)+(x.grade?' lớp '+x.grade:'');
+        return '<tr><td>'+esc(x.at.slice(11,16)+' '+x.at.slice(8,10)+'/'+x.at.slice(5,7))+'</td><td>'+esc(TYPE[x.type]||x.type)+'</td><td>'+esc(who)+'</td><td>'+esc(info)+'</td></tr>';
+      }).join('')+'</tbody></table>';
+
+    var t=new Date();
+    document.getElementById('adm-updated').textContent='Cập nhật lúc '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+', giờ Việt Nam';
+  }
+
+  function load(){
+    api('/api/admin/stats',{days:days}).then(function(d){show(true);render(d)}).catch(function(e){
+      if(e.status===401){setPw('');show(false);document.getElementById('adm-err').textContent='Sai mật khẩu, nhập lại nhé.'}
+      else toast('Không tải được báo cáo: '+e.message,'err');
+    });
+  }
+
+  document.getElementById('adm-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('adm-pw').value;
+    if(!v){document.getElementById('adm-err').textContent='Nhập mật khẩu quản trị';return}
+    setPw(v);document.getElementById('adm-err').textContent='';load();
+  });
+  document.querySelectorAll('[data-days]').forEach(function(b){b.onclick=function(){
+    days=+b.dataset.days;
+    document.querySelectorAll('[data-days]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    load();
+  }});
+  document.getElementById('adm-refresh').onclick=load;
+  document.getElementById('adm-logout').onclick=function(){setPw('');show(false);document.getElementById('adm-pw').value=''};
+  if(pw())load();
+})();
+</script>
+</body>
+</html>
