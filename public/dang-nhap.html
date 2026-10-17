@@ -73,6 +73,41 @@
         <button class="btn btn-google btn-block btn-lg" type="button" data-soon="Đăng ký bằng Google"><span style="width:20px;height:20px"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg></span>Tiếp tục với Google</button>
         <div class="divider">hoặc dùng email</div>
         <form id="form-signup" novalidate autocomplete="on">
+          <fieldset class="field" style="border:0">
+            <legend style="font-size:.88rem;font-weight:600;margin-bottom:7px">Bạn là</legend>
+            <div class="roles">
+              <label class="role"><input type="radio" name="role" value="student" checked><b>Học sinh</b><span>Học bài, luyện tập, làm đề</span></label>
+              <label class="role"><input type="radio" name="role" value="teacher"><b>Giáo viên</b><span>Soạn đề, giao bài, chấm bài</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field" id="grp-student" style="border:0">
+            <legend style="font-size:.88rem;font-weight:600;margin-bottom:7px">Bạn đang học lớp mấy?</legend>
+            <div class="grade-pick">
+              <label><input type="radio" name="grade" value="9">9</label>
+              <label><input type="radio" name="grade" value="10">10</label>
+              <label><input type="radio" name="grade" value="11">11</label>
+              <label><input type="radio" name="grade" value="12">12</label>
+            </div>
+            <p class="note" id="grade-note" hidden></p>
+            <span class="error-msg" data-for="grade"></span>
+          </fieldset>
+
+          <div id="grp-teacher" hidden>
+            <div class="field">
+              <label for="su-school">Trường đang dạy</label>
+              <input class="input" id="su-school" name="organization" type="text" autocomplete="organization" placeholder="VD: THPT Sóc Sơn">
+              <span class="error-msg" data-for="su-school"></span>
+            </div>
+            <div class="field">
+              <label for="su-teach">Lớp đang dạy</label>
+              <select class="input select" id="su-teach" name="teach-grade">
+                <option value="">Chọn khối lớp</option><option>Lớp 9</option><option>Lớp 10</option><option>Lớp 11</option><option>Lớp 12</option><option>Nhiều khối</option>
+              </select>
+            </div>
+            <p class="note" style="margin:-4px 0 16px">Tài khoản giáo viên cần được duyệt trước khi dùng các công cụ soạn đề và giao bài. Trong lúc chờ, bạn vẫn xem được toàn bộ bài học.</p>
+          </div>
+
           <div class="field">
             <label for="su-name">Họ và tên</label>
             <input class="input" id="su-name" name="name" type="text" autocomplete="name" placeholder="Nguyễn Văn An" required>
@@ -148,29 +183,58 @@
 
   function setErr(id,msg){
     var i=document.getElementById(id),m=document.querySelector('.error-msg[data-for="'+id+'"]');
-    i.classList.toggle('invalid',!!msg);i.setAttribute('aria-invalid',msg?'true':'false');
+    if(i){i.classList.toggle('invalid',!!msg);i.setAttribute('aria-invalid',msg?'true':'false');}
     m.textContent=msg||'';return !msg;
   }
   function val(id){return document.getElementById(id).value.trim()}
+
+  // Vai trò: học sinh chọn lớp, giáo viên nhập trường
+  var fs=document.getElementById('form-signup');
+  function role(){return fs.querySelector('input[name="role"]:checked').value}
+  fs.querySelectorAll('input[name="role"]').forEach(function(r){r.addEventListener('change',function(){
+    var t=role()==='teacher';
+    document.getElementById('grp-student').hidden=t;document.getElementById('grp-teacher').hidden=!t;
+  })});
+  fs.querySelectorAll('input[name="grade"]').forEach(function(r){r.addEventListener('change',function(){
+    var n=document.getElementById('grade-note');
+    n.hidden=r.value==='11';
+    n.textContent='Toán lớp '+r.value+' sắp ra mắt. Trong lúc chờ, bạn có thể học thử Toán 11.';
+    setErr('grade','');
+  })});
+
+  function users(){try{return JSON.parse(localStorage.getItem('mm_users'))||{}}catch(e){return {}}}
 
   document.getElementById('form-login').addEventListener('submit',function(e){
     e.preventDefault();
     var ok=setErr('login-email',EMAIL_RE.test(val('login-email'))?'':'Nhập email đúng định dạng, ví dụ ban@gmail.com');
     ok=setErr('login-pw',val('login-pw')?'':'Nhập mật khẩu')&&ok;
     if(!ok)return;
-    toast('Bản xem trước giao diện: đăng nhập thật sắp ra mắt. Đang mở Góc học tập…');
-    setTimeout(function(){location.href='tong-quan.html'},1400);
+    // BẢN XEM TRƯỚC: tìm tài khoản đã "đăng ký" trên trình duyệt này
+    var em=val('login-email').toLowerCase(),u=users()[em];
+    if(!u)u={name:em.split('@')[0],email:em,role:'student',grade:'11'};
+    MM.setUser(u);
+    toast('Đăng nhập thành công (bản xem trước). Đang mở trang của bạn…','ok');
+    setTimeout(function(){location.href='tong-quan.html'},1100);
   });
 
   document.getElementById('form-signup').addEventListener('submit',function(e){
     e.preventDefault();
-    var p=document.getElementById('su-pw').value;
-    var ok=setErr('su-name',val('su-name').length>=2?'':'Nhập họ và tên của bạn');
+    var p=document.getElementById('su-pw').value,r=role();
+    var g=fs.querySelector('input[name="grade"]:checked');
+    var ok=true;
+    if(r==='student'){ok=setErr('grade',g?'':'Chọn lớp bạn đang học')&&ok}
+    else{ok=setErr('su-school',val('su-school').length>=3?'':'Nhập tên trường bạn đang dạy')&&ok}
+    ok=setErr('su-name',val('su-name').length>=2?'':'Nhập họ và tên của bạn')&&ok;
     ok=setErr('su-email',EMAIL_RE.test(val('su-email'))?'':'Nhập email đúng định dạng, ví dụ ban@gmail.com')&&ok;
     ok=setErr('su-pw',(p.length>=8&&/[a-zA-Z]/.test(p)&&/\d/.test(p))?'':'Mật khẩu cần ít nhất 8 ký tự, có cả chữ và số')&&ok;
     ok=setErr('su-pw2',p&&p===document.getElementById('su-pw2').value?'':'Hai mật khẩu chưa khớp')&&ok;
     if(!ok)return;
-    toast('Bản xem trước giao diện: bước gửi mã xác nhận email sắp ra mắt.','ok');
+    var u={name:val('su-name'),email:val('su-email').toLowerCase(),role:r};
+    if(r==='student')u.grade=g.value;else{u.school=val('su-school');u.teach=document.getElementById('su-teach').value;u.approved=false}
+    var all=users();all[u.email]=u;try{localStorage.setItem('mm_users',JSON.stringify(all))}catch(e){}
+    MM.setUser(u);
+    toast('Tạo tài khoản thành công (bản xem trước, chưa gửi mã xác nhận email).','ok');
+    setTimeout(function(){location.href='tong-quan.html'},1300);
   });
 })();
 </script>

@@ -46,6 +46,45 @@
     });
   }
 
+  // ══ Phiên đăng nhập (BẢN XEM TRƯỚC: lưu trên trình duyệt, chưa có máy chủ) ══
+  var MM = window.MM = {
+    getUser: function () { try { return JSON.parse(localStorage.getItem('mm_user')); } catch (e) { return null; } },
+    setUser: function (u) { try { localStorage.setItem('mm_user', JSON.stringify(u)); } catch (e) {} },
+    logout: function () { try { localStorage.removeItem('mm_user'); } catch (e) {} location.href = 'index.html'; },
+    roleLabel: function (u) {
+      if (!u) return '';
+      if (u.role === 'teacher') return 'Giáo viên' + (u.approved ? '' : ' (chờ duyệt)');
+      return 'Học sinh lớp ' + u.grade;
+    },
+    initials: function (name) {
+      var p = String(name || '?').trim().split(/\s+/);
+      return (p.length > 1 ? p[0][0] + p[p.length - 1][0] : p[0].slice(0, 2)).toUpperCase();
+    },
+    getResults: function () { try { return JSON.parse(localStorage.getItem('mm_results')) || {}; } catch (e) { return {}; } }
+  };
+
+  // Hiện người dùng đang đăng nhập trên thanh điều hướng
+  var user = MM.getUser(), cta = document.querySelector('.nav-cta');
+  if (user && cta) {
+    cta.innerHTML =
+      '<div class="user-chip" title="' + user.email + '">' +
+        '<span class="avatar' + (user.role === 'teacher' ? ' t' : '') + '">' + MM.initials(user.name) + '</span>' +
+        '<span class="who"><b></b><small>' + MM.roleLabel(user) + '</small></span>' +
+      '</div>' +
+      '<button class="btn btn-ghost btn-sm" type="button" id="btn-logout">Đăng xuất</button>';
+    cta.querySelector('.who b').textContent = user.name;
+    document.getElementById('btn-logout').onclick = MM.logout;
+  }
+  // Giáo viên: mục "Giáo viên" trên menu dẫn tới Góc giáo viên
+  if (user && user.role === 'teacher') {
+    var tBtn = document.querySelector('.nav-links [data-soon="Không gian giáo viên"]');
+    if (tBtn) {
+      var a = document.createElement('a'); a.href = 'tong-quan.html'; a.textContent = 'Góc giáo viên';
+      tBtn.replaceWith(a);
+      var g = document.querySelector('.nav-links a[href="tong-quan.html"]'); if (g && g !== a) g.remove();
+    }
+  }
+
   // Hiển thị công thức toán bằng KaTeX (nếu đã nạp)
   window.renderMath = function (root) {
     if (window.renderMathInElement) {

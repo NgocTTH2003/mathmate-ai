@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luyện tập | MathMate</title>
+<title>Chọn bài luyện tập | MathMate</title>
 <meta name="theme-color" content="#0E0B26">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/pages.css">
 </head>
@@ -23,44 +23,39 @@
 
 <section class="quiz-head">
   <div class="wrap">
-    <div class="crumbs"><a href="khoa-hoc.html">Toán 11</a> / Chương 1 / <a href="bai-hoc.html">Bài 4</a> / Luyện tập</div>
-    <h1>Luyện tập: Phương trình lượng giác cơ bản</h1>
-    <p>8 câu theo ba dạng của đề thi tốt nghiệp THPT. Tối đa 3,5 điểm, quy đổi ra thang 10 khi nộp bài.</p>
-    <div class="mode-tabs">
-      <button type="button" aria-pressed="true" id="mode-auto">Trắc nghiệm, đúng sai, trả lời ngắn</button>
-      <button type="button" aria-pressed="false" id="mode-essay">Tự luận <span class="soon">Sắp ra mắt</span></button>
+    <h1>Chọn bài luyện tập</h1>
+    <p>Chọn lớp, rồi chọn bài muốn luyện. Mỗi bài luyện tập theo ba dạng câu của đề thi tốt nghiệp THPT.</p>
+    <div class="grade-tabs" role="group" aria-label="Chọn lớp">
+      <button type="button" data-g="9" aria-pressed="false">Lớp 9 <span class="soon">Sắp ra mắt</span></button>
+      <button type="button" data-g="10" aria-pressed="false">Lớp 10 <span class="soon">Sắp ra mắt</span></button>
+      <button type="button" data-g="11" aria-pressed="true">Lớp 11</button>
+      <button type="button" data-g="12" aria-pressed="false">Lớp 12 <span class="soon">Sắp ra mắt</span></button>
     </div>
+    <div class="guest-bar" id="guest-bar" hidden><span>Đăng nhập để lưu điểm và theo dõi tiến bộ của bạn.</span><a class="btn btn-primary btn-sm" href="dang-nhap.html">Đăng nhập</a></div>
   </div>
 </section>
-
 <div class="wrap">
-  <div id="auto-area">
-    <div class="quiz-layout">
-      <div>
-        <div class="panel result" id="result" hidden tabindex="-1"></div>
-        <form id="quiz" novalidate></form>
-      </div>
-      <aside class="quiz-side">
-        <div class="panel">
-          <div class="small">Thời gian làm bài</div>
-          <div class="timer" id="timer">00:00</div>
-          <div class="qgrid" id="qgrid"></div>
-          <div class="small" id="answered">Đã làm 0/8 câu</div>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="button" id="submit">Nộp bài</button>
-        <button class="btn btn-ghost btn-block" type="button" id="retry" hidden>Làm lại từ đầu</button>
-      </aside>
+  <div class="pick-layout" id="grade-11">
+    <div class="chapters" style="padding:0">
+      <details class="chapter" open>
+        <summary><span class="ch-num">1</span><div><h3>Hàm số lượng giác và phương trình lượng giác</h3><p>1 bài luyện tập đã mở</p></div><span class="pill pill-mint">Đang mở</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div><div class="set is-soon"><div><h4>Bài 1. Giá trị lượng giác của góc lượng giác</h4><p>Đang biên soạn</p></div><span class="set-score none"></span><span class="soon">Sắp ra mắt</span></div><div class="set is-soon"><div><h4>Bài 2. Công thức lượng giác</h4><p>Đang biên soạn</p></div><span class="set-score none"></span><span class="soon">Sắp ra mắt</span></div><div class="set is-soon"><div><h4>Bài 3. Hàm số lượng giác</h4><p>Đang biên soạn</p></div><span class="set-score none"></span><span class="soon">Sắp ra mắt</span></div><div class="set"><div><h4>Bài 4. Phương trình lượng giác cơ bản</h4><p>8 câu, 3 dạng đề thi, khoảng 15 phút</p></div><span class="set-score none" data-set="c1b4">Chưa làm</span><a class="btn btn-primary btn-sm" href="lam-bai.html">Làm bài</a></div></div>
+      </details>
+      <details class="chapter is-soon" data-soon="Luyện tập chương 2"><summary><span class="ch-num">2</span><div><h3>Dãy số. Cấp số cộng và cấp số nhân</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 3"><summary><span class="ch-num">3</span><div><h3>Các số đặc trưng đo xu thế trung tâm của mẫu số liệu ghép nhóm</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 4"><summary><span class="ch-num">4</span><div><h3>Quan hệ song song trong không gian</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 5"><summary><span class="ch-num">5</span><div><h3>Giới hạn. Hàm số liên tục</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 6"><summary><span class="ch-num">6</span><div><h3>Hàm số mũ và hàm số lôgarit</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 7"><summary><span class="ch-num">7</span><div><h3>Quan hệ vuông góc trong không gian</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 8"><summary><span class="ch-num">8</span><div><h3>Các quy tắc tính xác suất</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details><details class="chapter is-soon" data-soon="Luyện tập chương 9"><summary><span class="ch-num">9</span><div><h3>Đạo hàm</h3><p>Đang biên soạn bài luyện tập</p></div><span class="soon">Sắp ra mắt</span><span></span></summary></details>
     </div>
+    <aside class="exam-list">
+      <h2 style="font-size:1.1rem">Đề tổng hợp</h2>
+      <div class="panel exam is-soon"><span class="soon">Sắp ra mắt</span><h3>Đề kiểm tra chương 1</h3><p>45 phút, đủ ba dạng câu, có thang điểm.</p></div>
+      <div class="panel exam is-soon"><span class="soon">Sắp ra mắt</span><h3>Đề kiểm tra giữa học kỳ I</h3><p>90 phút, theo ma trận đề của Bộ.</p></div>
+      <div class="panel exam is-soon"><span class="soon">Sắp ra mắt</span><h3>Đề tự luận có AI chấm</h3><p>Gõ lời giải từng bước, MathMate chỉ ra bước sai.</p></div>
+      <div class="panel exam is-soon"><span class="soon">Sắp ra mắt</span><h3>Bài giáo viên giao</h3><p>Tham gia lớp bằng mã lớp để nhận đề từ thầy cô.</p></div>
+    </aside>
   </div>
-
-  <div class="panel essay-soon" id="essay-area" hidden>
+  <div class="panel essay-soon" id="grade-other" hidden>
     <span class="soon">Sắp ra mắt</span>
-    <h2>Làm bài tự luận ngay trên máy</h2>
-    <p style="max-width:34em">Bạn gõ lời giải từng dòng với bảng ký hiệu toán. MathMate chỉ ra bước sai, gợi ý cách sửa và đề xuất điểm để giáo viên duyệt.</p>
-    <div class="essay-mock" aria-hidden="true">Lời giải của bạn…
-      <div class="keys"><span>sin</span><span>cos</span><span>tan</span><span>π</span><span>k2π</span><span>√</span><span>⇔</span><span>∈ ℤ</span><span>Vì … nên …</span><span>Suy ra …</span></div>
-    </div>
-    <button class="btn btn-ghost" type="button" data-soon="Nhận thông báo khi có tự luận">Báo tôi khi ra mắt</button>
+    <h2 id="other-title">Toán lớp 12</h2>
+    <p style="max-width:32em">Chúng tôi đang biên soạn bài học và bài luyện tập cho lớp này. Trong lúc chờ, bạn có thể luyện thử Toán 11.</p>
+    <button class="btn btn-primary" type="button" id="back-11">Luyện thử Toán 11</button>
   </div>
 </div>
 
@@ -80,155 +75,27 @@
 <script src="assets/js/app.js"></script>
 <script>
 (function(){
-  // ══ Dữ liệu đề ══
-  var MCQ=[
-    {q:'Đổi \\(120^\\circ\\) sang radian ta được',o:['\\(\\dfrac{\\pi}{3}\\)','\\(\\dfrac{2\\pi}{3}\\)','\\(\\dfrac{3\\pi}{4}\\)','\\(\\dfrac{5\\pi}{6}\\)'],a:1,
-     e:'\\(120^\\circ = 120\\cdot\\dfrac{\\pi}{180} = \\dfrac{2\\pi}{3}\\).'},
-    {q:'Chu kỳ tuần hoàn của hàm số \\(y=\\sin 2x\\) là',o:['\\(2\\pi\\)','\\(\\pi\\)','\\(\\dfrac{\\pi}{2}\\)','\\(4\\pi\\)'],a:1,
-     e:'Hàm \\(y=\\sin ax\\) có chu kỳ \\(T=\\dfrac{2\\pi}{|a|}\\), nên \\(T=\\dfrac{2\\pi}{2}=\\pi\\).'},
-    {q:'Nghiệm của phương trình \\(\\cos x = \\dfrac{1}{2}\\) là',o:['\\(x=\\pm\\dfrac{\\pi}{6}+k2\\pi\\)','\\(x=\\pm\\dfrac{\\pi}{3}+k2\\pi\\)','\\(x=\\dfrac{\\pi}{3}+k\\pi\\)','\\(x=\\pm\\dfrac{\\pi}{3}+k\\pi\\)'],a:1,
-     e:'\\(\\dfrac{1}{2}=\\cos\\dfrac{\\pi}{3}\\), nên \\(\\cos x=\\cos\\dfrac{\\pi}{3}\\iff x=\\pm\\dfrac{\\pi}{3}+k2\\pi\\). Phương trình \\(\\cos\\) dùng \\(k2\\pi\\), không phải \\(k\\pi\\).'},
-    {q:'Điều kiện xác định của hàm số \\(y=\\tan x\\) là',o:['\\(x\\ne k\\pi\\)','\\(x\\ne\\dfrac{\\pi}{2}+k2\\pi\\)','\\(x\\ne\\dfrac{\\pi}{2}+k\\pi\\)','\\(x\\ne k2\\pi\\)'],a:2,
-     e:'\\(\\tan x=\\dfrac{\\sin x}{\\cos x}\\) xác định khi \\(\\cos x\\ne0\\iff x\\ne\\dfrac{\\pi}{2}+k\\pi\\).'}
-  ];
-  var TF={q:'Cho hàm số \\(y=\\cos x\\). Xét tính đúng sai của các mệnh đề sau.',items:[
-    {t:'a) Hàm số là hàm số chẵn.',a:true,e:'\\(\\cos(-x)=\\cos x\\) với mọi \\(x\\).'},
-    {t:'b) Tập giá trị của hàm số là \\([-1;1]\\).',a:true,e:'\\(-1\\le\\cos x\\le1\\) và đạt mọi giá trị trong đoạn này.'},
-    {t:'c) Hàm số tuần hoàn với chu kỳ \\(\\pi\\).',a:false,e:'Chu kỳ của \\(y=\\cos x\\) là \\(2\\pi\\).'},
-    {t:'d) Hàm số đồng biến trên khoảng \\((0;\\pi)\\).',a:false,e:'Trên \\((0;\\pi)\\), hàm số \\(y=\\cos x\\) nghịch biến.'}
-  ]};
-  var SHORT=[
-    {q:'Phương trình \\(\\sin x=0\\) có bao nhiêu nghiệm thuộc đoạn \\([0;2\\pi]\\)?',a:3,
-     e:'\\(\\sin x=0\\iff x=k\\pi\\). Trong \\([0;2\\pi]\\) có \\(x=0,\\ \\pi,\\ 2\\pi\\), tức 3 nghiệm.'},
-    {q:'Giá trị lớn nhất của hàm số \\(y=3\\sin x+1\\) bằng bao nhiêu?',a:4,
-     e:'Vì \\(\\sin x\\le1\\) nên \\(y\\le3\\cdot1+1=4\\), đạt khi \\(x=\\dfrac{\\pi}{2}+k2\\pi\\).'},
-    {q:'Tính giá trị của \\(\\sin 30^\\circ\\cdot\\cos 60^\\circ\\) (viết dạng số thập phân).',a:0.25,
-     e:'\\(\\sin30^\\circ=\\cos60^\\circ=\\dfrac{1}{2}\\), nên tích bằng \\(\\dfrac{1}{4}=0{,}25\\).'}
-  ];
-  var TOTAL=MCQ.length+1+SHORT.length;
-  var L='ABCD';
-  var form=document.getElementById('quiz');
-
-  // ══ Vẽ đề ══
-  function partHead(t,s){return '<div class="part-title"><h2>'+t+'</h2><span>'+s+'</span></div>'}
-  var h='<section class="part">'+partHead('Phần I. Trắc nghiệm nhiều lựa chọn','Mỗi câu 0,25 điểm');
-  MCQ.forEach(function(m,i){
-    h+='<div class="panel q" id="q'+(i+1)+'"><div class="q-head"><span class="q-num">Câu '+(i+1)+'.</span><div class="q-text">'+m.q+'</div></div><div class="opts">';
-    m.o.forEach(function(o,j){h+='<label class="opt"><input type="radio" name="m'+i+'" value="'+j+'"><span class="letter">'+L[j]+'</span><span>'+o+'</span></label>'});
-    h+='</div></div>';
+  var user=MM.getUser();
+  if(!user)document.getElementById('guest-bar').hidden=false;
+  // Điểm tốt nhất đã đạt
+  var res=MM.getResults();
+  document.querySelectorAll('[data-set]').forEach(function(el){
+    var r=res[el.dataset.set];if(!r)return;
+    el.textContent='Điểm cao nhất: '+(Math.round(r.ten*10)/10).toString().replace('.',',')+'/10';
+    el.className='set-score '+(r.ten>=8?'good':'mid');
   });
-  h+='</section><section class="part">'+partHead('Phần II. Đúng hoặc sai','Đúng 1 ý được 0,1; 2 ý 0,25; 3 ý 0,5; cả 4 ý 1 điểm');
-  var n=MCQ.length+1;
-  h+='<div class="panel q" id="q'+n+'"><div class="q-head"><span class="q-num">Câu '+n+'.</span><div class="q-text">'+TF.q+'</div></div>';
-  TF.items.forEach(function(it,j){
-    h+='<div class="tf-row" data-j="'+j+'"><span>'+it.t+'</span><div class="seg" role="radiogroup" aria-label="Ý '+'abcd'[j]+'">'+
-      '<label><input type="radio" name="tf'+j+'" value="1">Đúng</label><label><input type="radio" name="tf'+j+'" value="0">Sai</label></div></div>';
-  });
-  h+='</div></section><section class="part">'+partHead('Phần III. Trả lời ngắn','Mỗi câu 0,5 điểm');
-  SHORT.forEach(function(s,i){
-    var k=MCQ.length+2+i;
-    h+='<div class="panel q" id="q'+k+'"><div class="q-head"><span class="q-num">Câu '+k+'.</span><div class="q-text">'+s.q+'</div></div>'+
-      '<div class="short"><input class="input" type="text" inputmode="decimal" autocomplete="off" name="s'+i+'" placeholder="Nhập kết quả" aria-label="Đáp án câu '+k+'"><span class="small">Dùng dấu phẩy cho số thập phân, ví dụ 0,5</span></div></div>';
-  });
-  form.innerHTML=h+'</section>';
-
-  var grid=document.getElementById('qgrid');
-  for(var i=1;i<=TOTAL;i++)grid.insertAdjacentHTML('beforeend','<a href="#q'+i+'" data-q="'+i+'">'+i+'</a>');
-
-  // ══ Theo dõi đã làm ══
-  function isDone(i){
-    if(i<=MCQ.length)return !!form.querySelector('input[name="m'+(i-1)+'"]:checked');
-    if(i===MCQ.length+1)return form.querySelectorAll('.seg input:checked').length===4;
-    return form.elements['s'+(i-MCQ.length-2)].value.trim()!=='';
+  // Chọn lớp: mặc định lớp của học sinh
+  var tabs=document.querySelectorAll('.grade-tabs button');
+  function pick(g){
+    tabs.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.g===g)});
+    document.getElementById('grade-11').hidden=g!=='11';
+    document.getElementById('grade-other').hidden=g==='11';
+    document.getElementById('other-title').textContent='Toán lớp '+g;
   }
-  function refresh(){
-    var c=0;
-    for(var i=1;i<=TOTAL;i++){var d=isDone(i);if(d)c++;grid.querySelector('[data-q="'+i+'"]').classList.toggle('done',d)}
-    document.getElementById('answered').textContent='Đã làm '+c+'/'+TOTAL+' câu';
-    return c;
-  }
-  form.addEventListener('input',refresh);form.addEventListener('change',refresh);
-
-  // ══ Đồng hồ ══
-  var t0=Date.now(),tick=setInterval(function(){
-    var s=Math.floor((Date.now()-t0)/1000);
-    document.getElementById('timer').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-  },1000);
-
-  function num(v){
-    v=String(v).trim().replace(/\s/g,'').replace(',','.');
-    var f=v.match(/^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/);
-    if(f)return parseFloat(f[1])/parseFloat(f[2]);
-    return /^-?\d+(\.\d+)?$/.test(v)?parseFloat(v):NaN;
-  }
-  function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',')}
-  function addExplain(el,html){el.insertAdjacentHTML('beforeend','<div class="explain"><b>Lời giải.</b> '+html+'</div>')}
-  function verdict(el,cls,txt){el.querySelector('.q-head').insertAdjacentHTML('beforeend','<span class="verdict '+cls+'">'+txt+'</span>')}
-
-  // ══ Chấm bài ══
-  document.getElementById('submit').addEventListener('click',function(){
-    var c=refresh();
-    if(c<TOTAL&&!confirm('Bạn còn '+(TOTAL-c)+' câu chưa làm. Vẫn nộp bài?'))return;
-    clearInterval(tick);
-    form.classList.add('graded');
-    form.querySelectorAll('input').forEach(function(i){if(i.type==='text')i.readOnly=true});
-    var p1=0,p2=0,p3=0,right=0;
-
-    MCQ.forEach(function(m,i){
-      var el=document.getElementById('q'+(i+1)),sel=form.querySelector('input[name="m'+i+'"]:checked');
-      var opts=el.querySelectorAll('.opt'),ok=sel&&+sel.value===m.a;
-      opts[m.a].classList.add('is-right');
-      if(sel&&!ok)opts[+sel.value].classList.add('is-wrong');
-      if(ok){p1+=.25;right++}
-      el.classList.add(ok?'ok':'bad');verdict(el,ok?'ok':'bad',ok?'Đúng':(sel?'Sai':'Chưa làm'));
-      grid.querySelector('[data-q="'+(i+1)+'"]').className=ok?'ok':'bad';
-      addExplain(el,'Đáp án '+L[m.a]+'. '+m.e);
-    });
-
-    var n=MCQ.length+1,tfEl=document.getElementById('q'+n),cnt=0;
-    TF.items.forEach(function(it,j){
-      var row=tfEl.querySelector('.tf-row[data-j="'+j+'"]'),sel=form.querySelector('input[name="tf'+j+'"]:checked');
-      var ok=sel&&(sel.value==='1')===it.a;if(ok)cnt++;
-      row.classList.add(ok?'is-right':'is-wrong');
-      row.insertAdjacentHTML('beforeend','<span class="tf-verdict">'+(ok?'✓ ':'✗ ')+'Đáp án: '+(it.a?'Đúng':'Sai')+'. '+it.e+'</span>');
-    });
-    p2=[0,.1,.25,.5,1][cnt];if(cnt===4)right++;
-    tfEl.classList.add(cnt===4?'ok':'bad');
-    verdict(tfEl,cnt===4?'ok':(cnt>0?'part':'bad'),'Đúng '+cnt+'/4 ý');
-    grid.querySelector('[data-q="'+n+'"]').className=cnt===4?'ok':'bad';
-
-    SHORT.forEach(function(s,i){
-      var k=MCQ.length+2+i,el=document.getElementById('q'+k),v=form.elements['s'+i].value;
-      var ok=Math.abs(num(v)-s.a)<1e-9;
-      if(ok){p3+=.5;right++}
-      el.classList.add(ok?'ok':'bad');verdict(el,ok?'ok':'bad',ok?'Đúng':(v.trim()?'Sai':'Chưa làm'));
-      grid.querySelector('[data-q="'+k+'"]').className=ok?'ok':'bad';
-      addExplain(el,'Đáp án: <b>'+fmt(s.a)+'</b>. '+s.e);
-    });
-
-    var score=p1+p2+p3,ten=score/3.5*10;
-    var r=document.getElementById('result');
-    r.style.setProperty('--p',Math.round(score/3.5*100));
-    r.innerHTML='<div class="ring" style="--p:'+Math.round(score/3.5*100)+'"><div><span><b>'+fmt(ten)+'</b><br><small>thang 10</small></span></div></div>'+
-      '<div><h2 style="font-size:1.4rem;margin-bottom:8px">'+(ten>=8?'Rất tốt, bạn nắm chắc bài này.':ten>=5?'Khá ổn. Xem lại các câu sai bên dưới nhé.':'Bạn nên xem lại bài học rồi làm lại.')+'</h2>'+
-      '<div class="result-break"><span>Điểm đề thi: <b>'+fmt(score)+' / 3,5</b></span><span>Phần I: <b>'+fmt(p1)+'</b>, Phần II: <b>'+fmt(p2)+'</b>, Phần III: <b>'+fmt(p3)+'</b></span><span>Đúng hoàn toàn '+right+'/'+TOTAL+' câu, thời gian '+document.getElementById('timer').textContent+'</span></div></div>'+
-      '<a class="btn btn-ghost" href="bai-hoc.html">Xem lại bài học</a>';
-    r.hidden=false;
-    document.getElementById('submit').hidden=true;
-    document.getElementById('retry').hidden=false;
-    try{localStorage.setItem('mm_last_result',JSON.stringify({score:score,ten:ten,right:right,total:TOTAL,time:document.getElementById('timer').textContent,at:Date.now()}))}catch(e){}
-    renderMath(form);renderMath(r);
-    r.scrollIntoView({behavior:'smooth',block:'start'});r.focus({preventScroll:true});
-  });
-  document.getElementById('retry').addEventListener('click',function(){location.reload()});
-
-  // ══ Chế độ tự luận (sắp ra mắt) ══
-  var bA=document.getElementById('mode-auto'),bE=document.getElementById('mode-essay');
-  function mode(essay){
-    bA.setAttribute('aria-pressed',!essay);bE.setAttribute('aria-pressed',essay);
-    document.getElementById('auto-area').hidden=essay;document.getElementById('essay-area').hidden=!essay;
-  }
-  bA.onclick=function(){mode(false)};bE.onclick=function(){mode(true)};
+  tabs.forEach(function(b){b.onclick=function(){pick(b.dataset.g)}});
+  document.getElementById('back-11').onclick=function(){pick('11')};
+  pick(user&&user.role==='student'&&user.grade?String(user.grade):'11');
+  document.querySelectorAll('details.chapter.is-soon').forEach(function(d){d.addEventListener('toggle',function(){if(d.open)d.open=false})});
 })();
 </script>
 </body>

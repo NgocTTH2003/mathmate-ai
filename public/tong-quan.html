@@ -23,9 +23,38 @@
 
 <div class="wrap">
   <div class="dash-head">
-    <div><p id="today" class="small"></p><h1>Chào bạn, hôm nay học gì nào?</h1></div>
-    <span class="pill">Bản xem trước: dữ liệu lưu trên trình duyệt này</span>
+    <div><p id="today" class="small"></p><h1 id="hello">Chào bạn, hôm nay học gì nào?</h1></div>
+    <span class="pill" id="role-pill">Bản xem trước: dữ liệu lưu trên trình duyệt này</span>
   </div>
+
+  <!-- KHÁCH -->
+  <div id="view-guest" hidden>
+    <div class="panel cta-end" style="margin-bottom:40px">
+      <h2>Đăng nhập để có Góc học tập của riêng bạn</h2>
+      <p>Lưu tiến độ học, điểm luyện tập và nhận bài giáo viên giao.</p>
+      <div class="hero-actions" style="justify-content:center;margin-top:8px">
+        <a class="btn btn-primary btn-lg" href="dang-nhap.html#dang-ky">Tạo tài khoản</a>
+        <a class="btn btn-ghost btn-lg" href="dang-nhap.html">Đăng nhập</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- GIÁO VIÊN -->
+  <div id="view-teacher" hidden>
+    <div class="panel pending"><span class="dot"></span><div><h3 style="font-size:1.05rem;margin-bottom:4px">Tài khoản giáo viên đang chờ duyệt</h3><p style="font-size:.92rem">Chúng tôi sẽ xác minh thông tin và mở các công cụ bên dưới cho bạn. Trong lúc chờ, bạn có thể xem toàn bộ <a class="link" href="khoa-hoc.html">bài học</a> và <a class="link" href="luyen-tap.html">bài luyện tập</a> như học sinh.</p></div></div>
+    <div class="t-grid" style="padding-bottom:40px">
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Lớp học của tôi</h3><p>Tạo lớp, nhận mã lớp để học sinh tham gia, xem danh sách học sinh.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Tạo lớp học">Tạo lớp</button></div>
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Ngân hàng câu hỏi</h3><p>Lưu câu hỏi theo chương, bài, dạng câu và mức độ.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Ngân hàng câu hỏi">Mở ngân hàng</button></div>
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Tải đề lên</h3><p>Tải file Word hoặc PDF, hệ thống tách từng câu để bạn kiểm tra rồi lưu.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Tải đề lên">Tải đề</button></div>
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Tạo đề theo ma trận</h3><p>Chọn số câu từng mức độ, hệ thống bốc câu hoặc AI sinh câu tương tự.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Tạo đề theo ma trận">Tạo đề</button></div>
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Giao bài và chấm bài</h3><p>Giao đề kèm hạn nộp. AI đề xuất điểm tự luận, bạn duyệt trước khi công bố.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Giao bài">Giao bài</button></div>
+      <div class="panel t-card"><span class="soon">Sắp ra mắt</span><h3>Thống kê lớp</h3><p>Xem điểm từng học sinh và câu nào cả lớp sai nhiều nhất.</p><button class="btn btn-ghost btn-sm" style="margin-top:auto;align-self:flex-start" type="button" data-soon="Thống kê lớp">Xem thống kê</button></div>
+    </div>
+  </div>
+
+  <!-- HỌC SINH -->
+  <div id="view-student" hidden>
+  <div class="panel note" id="grade-wait" hidden style="margin:0 0 20px;padding:16px 18px;font-size:.93rem"></div>
   <div class="dash">
     <div class="col">
       <section class="panel continue">
@@ -33,11 +62,11 @@
         <h3>Bài 4. Phương trình lượng giác cơ bản</h3>
         <p>Toán 11, chương 1. Đọc lý thuyết, xem 3 ví dụ có lời giải rồi làm bài luyện tập.</p>
         <div class="bar"><i id="ch-bar" style="width:10%"></i></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="bai-hoc.html">Vào học</a><a class="btn btn-ghost" href="luyen-tap.html">Làm bài luyện tập</a></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-primary" href="bai-hoc.html">Vào học</a><a class="btn btn-ghost" href="lam-bai.html">Làm bài luyện tập</a></div>
       </section>
 
       <section class="panel">
-        <h2>Kết quả luyện tập gần nhất</h2>
+        <h2>Điểm cao nhất bài luyện tập</h2>
         <div id="last"></div>
       </section>
 
@@ -75,13 +104,8 @@
         <button class="btn btn-ghost btn-block" type="button" data-soon="Hỏi MathMate">Đặt câu hỏi</button>
       </section>
 
-      <section class="panel locked">
-        <h2>Chế độ giáo viên</h2>
-        <span class="soon">Sắp ra mắt</span>
-        <p style="font-size:.93rem;margin-bottom:14px">Tạo lớp, soạn đề, giao bài và xem thống kê.</p>
-        <button class="btn btn-ghost btn-block" type="button" data-soon="Không gian giáo viên">Đăng ký làm giáo viên</button>
-      </section>
     </div>
+  </div>
   </div>
 </div>
 
@@ -103,19 +127,33 @@
 (function(){
   var d=new Date(),days=['Chủ nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
   document.getElementById('today').textContent=days[d.getDay()]+', '+d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+  var user=MM.getUser(),view=!user?'guest':(user.role==='teacher'?'teacher':'student');
+  document.getElementById('view-'+view).hidden=false;
+  if(user){
+    document.getElementById('hello').textContent=(view==='teacher'?'Chào thầy cô ':'Chào ')+user.name.split(' ').pop()+'!';
+    document.getElementById('role-pill').textContent=MM.roleLabel(user);
+    if(view==='student'&&String(user.grade)!=='11'){
+      var w=document.getElementById('grade-wait');w.hidden=false;
+      w.textContent='Toán lớp '+user.grade+' sắp ra mắt. Trong lúc chờ, bạn có thể học thử Toán 11 bên dưới.';
+    }
+  }else{
+    document.getElementById('hello').textContent='Góc học tập';
+    document.getElementById('role-pill').textContent='Bạn chưa đăng nhập';
+  }
+  if(view!=='student')return;
   var box=document.getElementById('last'),r=null;
-  try{r=JSON.parse(localStorage.getItem('mm_last_result'))}catch(e){}
+  try{r=MM.getResults()['c1b4']||null}catch(e){}
   function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',')}
   if(r){
     var p=Math.round(r.score/3.5*100),when=new Date(r.at);
     box.innerHTML='<div class="last"><div class="ring" style="--p:'+p+'"><div><span><b>'+fmt(r.ten)+'</b><br><small>/10</small></span></div></div>'+
       '<div><p style="color:var(--text);font-weight:600">Luyện tập Bài 4</p><p class="small">Đúng '+r.right+'/'+r.total+' câu, '+fmt(r.score)+'/3,5 điểm, làm trong '+r.time+'</p>'+
       '<p class="small">'+when.getDate()+'/'+(when.getMonth()+1)+' lúc '+String(when.getHours()).padStart(2,'0')+':'+String(when.getMinutes()).padStart(2,'0')+'</p>'+
-      '<a class="btn btn-ghost btn-sm" style="margin-top:10px" href="luyen-tap.html">Làm lại</a></div></div>';
+      '<a class="btn btn-ghost btn-sm" style="margin-top:10px" href="lam-bai.html">Làm lại</a></div></div>';
     if(r.ten>=8){document.getElementById('path-4').className='done';document.getElementById('path-4-state').textContent='Hoàn thành';}
     document.getElementById('ch-bar').style.width=Math.max(10,Math.round(p*0.2))+'%';
   }else{
-    box.innerHTML='<div class="empty"><p>Bạn chưa làm bài luyện tập nào. Làm thử 8 câu để biết mình đang ở đâu.</p><a class="btn btn-primary btn-sm" href="luyen-tap.html">Làm bài đầu tiên</a></div>';
+    box.innerHTML='<div class="empty"><p>Bạn chưa làm bài luyện tập nào. Làm thử 8 câu để biết mình đang ở đâu.</p><a class="btn btn-primary btn-sm" href="lam-bai.html">Làm bài đầu tiên</a></div>';
   }
 })();
 </script>
