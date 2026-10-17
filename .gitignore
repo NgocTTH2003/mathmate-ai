@@ -1,0 +1,10 @@
+# Tài liệu riêng, không đưa lên GitHub
+tai-lieu/
+
+# File hệ thống & công cụ
+node_modules/
+.wrangler/
+.dev.vars
+.DS_Store
+Thumbs.db
+documents/
