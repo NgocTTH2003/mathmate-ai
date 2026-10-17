@@ -451,3 +451,7 @@ a.lesson:hover h4{color:var(--violet-2)}
 .btn-danger{border:1px solid rgba(255,107,138,.5);color:var(--coral)}
 .btn-danger:hover{background:rgba(255,107,138,.1)}
 @media (max-width:860px){.acct{grid-template-columns:1fr}.acct-nav{position:static;flex-direction:row;overflow-x:auto}}
+
+/* Video bài giảng */
+.video-wrap video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);border:1px solid var(--line);background:#000}
+.video-note{margin-top:10px;font-size:.85rem;color:var(--text-3)}
