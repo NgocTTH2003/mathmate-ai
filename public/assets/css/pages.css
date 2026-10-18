@@ -468,3 +468,14 @@ a.lesson:hover h4{color:var(--violet-2)}
 @media (min-width:641px){
   .hero .lead{text-align:justify;text-justify:inter-word}
 }
+
+/* Toàn trang: nội dung rộng tối đa 1400px */
+:root{--wrap:1400px}
+/* Trang chủ: tiêu đề đúng 2 dòng, cột chữ rộng hơn cột lời giải một chút */
+.hero .wrap{grid-template-columns:1.15fr .85fr}
+.hero-title{font-size:clamp(2rem,3.5vw,3.3rem)}
+.hero-title span{display:block;white-space:nowrap}
+@media (max-width:640px){.hero-title span{white-space:normal}}
+
+/* Trang chủ: robot MathMate nhỏ trong trạng thái "đang chấm" */
+.g-bot{width:24px;height:24px;margin-right:8px;border-radius:50%;flex-shrink:0}
