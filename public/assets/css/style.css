@@ -183,3 +183,9 @@ button.user-chip:hover,button.user-chip[aria-expanded="true"]{border-color:var(-
 .auth-dialog .check input{width:17px;height:17px;accent-color:var(--violet)}
 body.modal-open{overflow:hidden}
 body.gated main,body.gated .footer{filter:blur(8px);pointer-events:none;user-select:none}
+
+/* Thanh điều hướng: nhãn "Sắp có" nhỏ, vàng dịu, gắn ở góc trên bên phải (các nhãn khác giữ nguyên) */
+.nav-links .has-soon{position:relative;margin-right:34px}
+.soon-corner{position:absolute;top:-4px;left:calc(100% - 10px);padding:2px 6px;font-size:.66rem;line-height:1;font-weight:600;color:rgba(255,194,102,.82);background:#1d1830;border-color:rgba(255,194,102,.25)}
+.soon-corner::before{display:none}
+@media (max-width:860px){.nav.open .nav-links .has-soon{margin-right:0;align-self:flex-start}}
