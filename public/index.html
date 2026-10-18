@@ -39,6 +39,9 @@
       <video id="story-video" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-label="Video giới thiệu MathMate">
         <source src="assets/video/trang-chu/video-introduce.mp4" type="video/mp4">
       </video>
+      <button class="sound-btn" type="button" id="story-sound" aria-label="Bật âm thanh" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path class="sb-off" d="m23 9-6 6M17 9l6 6"/><path class="sb-on" d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -212,15 +215,31 @@
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : run(); });
 })();
 
-// Video đầu trang: luôn tự phát và lặp lại
+// Video đầu trang: tự phát không tiếng, bật tiếng ở lần bấm đầu tiên hoặc khi bấm nút loa
 (function(){
-  var v=document.getElementById('story-video');
+  var v=document.getElementById('story-video'),b=document.getElementById('story-sound');
   if(!v)return;
   v.muted=true;
   var play=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};
   play();
   document.addEventListener('visibilitychange',function(){if(!document.hidden)play();});
-  document.addEventListener('click',play,{once:true});
+
+  function setSound(on){
+    v.muted=!on;
+    if(b){b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',on?'Tắt âm thanh':'Bật âm thanh');}
+    if(on){ // tăng âm lượng từ từ cho êm tai
+      v.volume=0;play();
+      var k=0,t=setInterval(function(){k+=0.05;v.volume=Math.min(0.8,k);if(k>=0.8)clearInterval(t);},60);
+    }
+  }
+  if(b)b.addEventListener('click',function(e){e.stopPropagation();setSound(v.muted);});
+  // Lần bấm/chạm/nhấn phím đầu tiên trên trang: tự bật tiếng
+  var first=function(e){
+    if(b&&b.contains(e.target))return;
+    setSound(true);
+    ['pointerdown','keydown'].forEach(function(n){document.removeEventListener(n,first);});
+  };
+  ['pointerdown','keydown'].forEach(function(n){document.addEventListener(n,first);});
 })();
 </script>
 </body>
