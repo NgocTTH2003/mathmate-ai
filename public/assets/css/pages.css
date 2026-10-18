@@ -464,3 +464,7 @@ a.lesson:hover h4{color:var(--violet-2)}
 .pr-num{width:34px;height:34px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:.95rem;color:var(--mint);background:rgba(52,211,163,.12);border:1px solid rgba(52,211,163,.3)}
 @media (max-width:960px){.promise{grid-template-columns:1fr;gap:28px}}
 @media (max-width:640px){.promises{grid-template-columns:1fr}}
+
+@media (min-width:641px){
+  .hero .lead{text-align:justify;text-justify:inter-word}
+}
