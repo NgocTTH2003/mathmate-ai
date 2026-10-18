@@ -111,7 +111,7 @@
       <button type="button" data-soon="Chính sách quyền riêng tư">Quyền riêng tư</button>
       <button type="button" data-soon="Liên hệ">Liên hệ</button>
     </div>
-    <p>© 2026 MathMate. Học Toán miễn phí cho học sinh Việt Nam.</p>
+    <p>© 2026 MathMate. Học Toán cùng AI cho học sinh Việt Nam.</p>
   </div>
 </footer>
 <script src="assets/js/app.js"></script>
@@ -149,15 +149,19 @@
     var ok=setErr('pf-in-name',name.length>=2?'':'Nhập họ và tên của bạn');
     if(isT)ok=setErr('pf-school',document.getElementById('pf-school').value.trim().length>=3?'':'Nhập tên trường bạn đang dạy')&&ok;
     if(!ok)return;
-    u.name=name;
-    if(isT)u.school=document.getElementById('pf-school').value.trim();
-    else{var g=document.querySelector('input[name="pf-grade"]:checked');if(g)u.grade=g.value}
-    MM.setUser(u);
-    try{var all=JSON.parse(localStorage.getItem('mm_users'))||{};all[u.email]=Object.assign(all[u.email]||{},u);localStorage.setItem('mm_users',JSON.stringify(all))}catch(e){}
-    fill();
-    var chip=document.querySelector('.who b');if(chip)chip.textContent=u.name;
-    var small=document.querySelector('.who small');if(small)small.textContent=MM.roleLabel(u);
-    toast('Đã lưu hồ sơ','ok');
+    var body={name:name};
+    if(isT)body.school=document.getElementById('pf-school').value.trim();
+    else{var g=document.querySelector('input[name="pf-grade"]:checked');body.grade=g?g.value:''}
+    MM.api('/api/auth/profile',body).then(function(r){
+      if(!r.ok){
+        var f=r.data.fields||{};if(f.name)setErr('pf-in-name',f.name);if(f.school)setErr('pf-school',f.school);
+        toast(r.data.error||'Không lưu được hồ sơ','err');return;
+      }
+      u=r.data.user;MM.setUser(u);fill();
+      var chip=document.querySelector('.who b');if(chip)chip.textContent=u.name;
+      var small=document.querySelector('.who small');if(small)small.textContent=MM.roleLabel(u);
+      toast('Đã lưu hồ sơ','ok');
+    },function(){toast('Không kết nối được máy chủ, bạn thử lại nhé.','err')});
   });
 
   // Hiện/ẩn mật khẩu
@@ -180,8 +184,15 @@
     if(ok&&n===c)ok=setErr('pw-new','Mật khẩu mới phải khác mật khẩu hiện tại');
     ok=setErr('pw-new2',n&&n===n2?'':'Hai mật khẩu mới chưa khớp')&&ok;
     if(!ok)return;
-    toast('Bản xem trước: đổi mật khẩu sẽ hoạt động khi có đăng nhập thật.');
-    this.reset();meter.dataset.level=0;
+    var form=this;
+    MM.api('/api/auth/password',{current:c,password:n}).then(function(r){
+      if(!r.ok){
+        var f=r.data.fields||{};if(f.current)setErr('pw-cur',f.current);if(f.password)setErr('pw-new',f.password);
+        if(!r.data.fields)toast(r.data.error||'Không đổi được mật khẩu','err');return;
+      }
+      form.reset();meter.dataset.level=0;
+      toast('Đã đổi mật khẩu. Các thiết bị khác đã được đăng xuất.','ok');
+    },function(){toast('Không kết nối được máy chủ, bạn thử lại nhé.','err')});
   });
 
   // Đánh dấu mục đang xem ở menu trái

@@ -51,9 +51,35 @@
   var MM = window.MM = {
     getUser: function () { try { return JSON.parse(localStorage.getItem('mm_user')); } catch (e) { return null; } },
     setUser: function (u) { try { localStorage.setItem('mm_user', JSON.stringify(u)); } catch (e) {} },
-    logout: function () { try { localStorage.removeItem('mm_user'); } catch (e) {} location.href = 'index.html'; },
+    logout: function () {
+      var done = function () { try { localStorage.removeItem('mm_user'); } catch (e) {} location.href = 'index.html'; };
+      MM.api('/api/auth/logout', {}).then(done, done);
+    },
+    // Gọi API của máy chủ. Trả về { ok, status, data }
+    api: function (path, body) {
+      return fetch(path, {
+        method: body === undefined ? 'GET' : 'POST',
+        headers: body === undefined ? {} : { 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body),
+        credentials: 'same-origin'
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, status: r.status, data: d }; });
+      });
+    },
+    // Đối chiếu người dùng lưu tạm trên trình duyệt với máy chủ; lệch thì cập nhật và tải lại trang
+    syncUser: function () {
+      if (location.protocol === 'file:') return;
+      MM.api('/api/auth/me').then(function (r) {
+        if (!r.ok) return;
+        var server = r.data.user || null, local = MM.getUser();
+        if (JSON.stringify(server) === JSON.stringify(local)) return;
+        try { server ? localStorage.setItem('mm_user', JSON.stringify(server)) : localStorage.removeItem('mm_user'); } catch (e) {}
+        location.reload();
+      });
+    },
     roleLabel: function (u) {
       if (!u) return '';
+      if (u.role === 'admin') return 'Quản trị viên';
       if (u.role === 'teacher') return 'Giáo viên' + (u.approved ? '' : ' (chờ duyệt)');
       return 'Học sinh lớp ' + u.grade;
     },
@@ -102,6 +128,7 @@
           '<a role="menuitem" href="tai-khoan.html#ho-so">Hồ sơ của tôi</a>' +
           '<a role="menuitem" href="tai-khoan.html#mat-khau">Đổi mật khẩu</a>' +
           '<a role="menuitem" href="tong-quan.html">' + home + '</a>' +
+          (user.role === 'admin' ? '<a role="menuitem" href="admin.html">Trang quản trị</a>' : '') +
           '<button role="menuitem" type="button" data-soon="Cài đặt thông báo">Cài đặt thông báo</button>' +
           '<hr>' +
           '<button role="menuitem" type="button" class="danger" id="btn-logout">Đăng xuất</button>' +
@@ -132,6 +159,109 @@
     }
   }
 
+
+  // ══ Khách chỉ xem được Trang chủ; trang khác phải đăng nhập ══
+  var PUBLIC_PAGES = { '': 1, 'index': 1, 'dang-nhap': 1, 'admin': 1 };
+  function pageKey(path) { return String(path || '').replace(/^.*\//, '').replace(/\.html$/, ''); }
+  function needsLogin(path) { return !PUBLIC_PAGES[pageKey(path)]; }
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var authModal = null, authNext = 'tong-quan.html', authGate = false;
+
+  function buildAuthModal() {
+    var m = document.createElement('div');
+    m.className = 'auth-modal';
+    m.hidden = true;
+    m.innerHTML =
+      '<div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="am-title">' +
+        '<button class="am-close" type="button" aria-label="Đóng">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+        '<img class="am-bot" src="assets/img/mathmate-bot.svg" alt="" width="72" height="72">' +
+        '<h2 id="am-title">Đăng nhập để học tiếp</h2>' +
+        '<p class="am-sub">Tạo tài khoản để xem bài học, làm bài luyện tập và lưu tiến độ của bạn.</p>' +
+        '<form class="am-form" novalidate autocomplete="on">' +
+          '<div class="field"><label for="am-email">Email</label>' +
+            '<input class="input" id="am-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ban@gmail.com" required>' +
+            '<span class="error-msg" id="am-email-err"></span></div>' +
+          '<div class="field"><label for="am-pw">Mật khẩu</label>' +
+            '<input class="input" id="am-pw" name="password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu" required>' +
+            '<span class="error-msg" id="am-pw-err"></span></div>' +
+          '<div class="am-row"><label class="check"><input type="checkbox" name="remember" checked> Ghi nhớ đăng nhập</label>' +
+            '<button class="link" type="button" data-soon="Quên mật khẩu">Quên mật khẩu?</button></div>' +
+          '<button class="btn btn-primary btn-block btn-lg" type="submit">Đăng nhập</button>' +
+        '</form>' +
+        '<div class="divider">hoặc</div>' +
+        '<button class="btn btn-google btn-block" type="button" data-soon="Đăng nhập bằng Google">Tiếp tục với Google</button>' +
+        '<p class="am-foot">Chưa có tài khoản? <a class="link" id="am-signup" href="dang-nhap.html#dang-ky">Tạo tài khoản</a></p>' +
+      '</div>';
+    document.body.appendChild(m);
+
+    m.querySelector('.am-close').onclick = closeAuth;
+    m.addEventListener('click', function (e) { if (e.target === m) closeAuth(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) closeAuth(); });
+    m.querySelector('.am-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var em = m.querySelector('#am-email'), pw = m.querySelector('#am-pw');
+      var okE = EMAIL_RE.test(em.value.trim()), okP = !!pw.value;
+      m.querySelector('#am-email-err').textContent = okE ? '' : 'Nhập email đúng định dạng, ví dụ ban@gmail.com';
+      m.querySelector('#am-pw-err').textContent = okP ? '' : 'Nhập mật khẩu';
+      em.classList.toggle('invalid', !okE); pw.classList.toggle('invalid', !okP);
+      if (!okE || !okP) return;
+      var btn = m.querySelector('.am-form button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Đang đăng nhập…';
+      MM.api('/api/auth/login', { email: em.value, password: pw.value, remember: m.querySelector('.am-row input').checked })
+        .then(function (r) {
+          if (!r.ok) {
+            m.querySelector('#am-pw-err').textContent = r.data.error || 'Đăng nhập không thành công';
+            pw.classList.add('invalid');
+            return;
+          }
+          MM.setUser(r.data.user); MM.track('login');
+          toast('Đăng nhập thành công!', 'ok');
+          setTimeout(function () { authGate ? location.reload() : (location.href = authNext); }, 500);
+        }, function () { toast('Không kết nối được máy chủ, bạn thử lại nhé.', 'err'); })
+        .then(function () { btn.disabled = false; btn.textContent = 'Đăng nhập'; });
+    });
+    return m;
+  }
+
+  function openAuth(next, gate) {
+    if (!authModal) authModal = buildAuthModal();
+    authNext = next || 'tong-quan.html';
+    authGate = !!gate;
+    authModal.querySelector('#am-signup').href = 'dang-nhap.html?next=' + encodeURIComponent(authNext) + '#dang-ky';
+    authModal.querySelector('.am-close').setAttribute('aria-label', gate ? 'Về trang chủ' : 'Đóng');
+    authModal.hidden = false;
+    document.body.classList.add('modal-open');
+    setTimeout(function () { authModal.querySelector('#am-email').focus(); }, 50);
+  }
+  function closeAuth() {
+    if (authGate) { location.href = 'index.html'; return; }
+    authModal.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+  window.MM.openAuth = openAuth;
+
+  if (!MM.getUser()) {
+    // Bấm vào liên kết tới trang cần đăng nhập → hiện hộp đăng nhập
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a || a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) === '#' || /^(https?:|mailto:|tel:)/i.test(href)) return;
+      var path = href.split('#')[0].split('?')[0];
+      if (!path || !needsLogin(path)) return;
+      e.preventDefault();
+      openAuth(href, false);
+    }, true);
+    // Vào thẳng một trang cần đăng nhập → làm mờ trang và hiện hộp đăng nhập
+    if (needsLogin(location.pathname)) {
+      document.body.classList.add('gated');
+      openAuth(pageKey(location.pathname) + '.html' + location.hash, true);
+    }
+  }
+
+  MM.syncUser();
+
   // Ghi công người tạo web, hiện ở cuối mọi trang
   var credit = document.createElement('p');
   credit.className = 'credit';
@@ -156,6 +286,21 @@
     ask.setAttribute('aria-label', 'Mở trợ lý MathMate');
     ask.innerHTML = '<span class="ask-label">Khó cứ để MathMate lo</span><span class="ask-face"><img src="assets/img/mathmate-bot.svg" alt="" width="64" height="64"><i class="ask-dot"></i></span>';
     document.body.appendChild(ask);
+
+    // Chữ chạy kiểu gõ phím: gõ ra, giữ 3 giây, xóa dần, rồi lặp lại
+    var lbl = ask.querySelector('.ask-label'), full = lbl.textContent;
+    if (lbl.offsetWidth) {
+      lbl.style.minWidth = lbl.offsetWidth + 'px';   // giữ cố định độ rộng, khung không bị co giãn
+      lbl.innerHTML = '<span class="ask-typed"></span><i class="ask-caret"></i>';
+      var typed = lbl.firstChild, pos = 0, dir = 1;
+      (function tick() {
+        pos += dir;
+        typed.textContent = full.slice(0, pos);
+        if (dir > 0 && pos >= full.length) { dir = -1; return setTimeout(tick, 3000); }
+        if (dir < 0 && pos <= 0) { dir = 1; return setTimeout(tick, 600); }
+        setTimeout(tick, dir > 0 ? 75 : 35);
+      })();
+    }
   }
 
   // Hiển thị công thức toán bằng KaTeX (nếu đã nạp)

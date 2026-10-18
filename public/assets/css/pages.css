@@ -455,3 +455,12 @@ a.lesson:hover h4{color:var(--violet-2)}
 /* Video bài giảng */
 .video-wrap video{display:block;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);border:1px solid var(--line);background:#000}
 .video-note{margin-top:10px;font-size:.85rem;color:var(--text-3)}
+/* Trang chủ: cam kết dùng AI có trách nhiệm */
+.promise{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start}
+.promises{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.promises li{display:flex;gap:14px;padding:20px;border-radius:var(--r-md);border:1px solid var(--line);background:rgba(21,17,53,.55)}
+.promises h3{font-size:1rem;margin-bottom:4px}
+.promises p{font-size:.9rem}
+.pr-num{width:34px;height:34px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;font-family:var(--f-head);font-weight:700;font-size:.95rem;color:var(--mint);background:rgba(52,211,163,.12);border:1px solid rgba(52,211,163,.3)}
+@media (max-width:960px){.promise{grid-template-columns:1fr;gap:28px}}
+@media (max-width:640px){.promises{grid-template-columns:1fr}}

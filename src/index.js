@@ -8,6 +8,8 @@
  * Cấu hình trên Cloudflare: binding D1 tên DB, secret ADMIN_PASSWORD.
  */
 
+import { handleAuth } from './auth.js';
+
 const EVENT_TYPES = new Set(['page_view', 'signup', 'login', 'practice_submit', 'soon_click']);
 const ROLES = new Set(['guest', 'student', 'teacher']);
 
@@ -106,8 +108,12 @@ export default {
     const path = url.pathname;
 
     if (path.startsWith('/api/')) {
-      if (request.method !== 'POST') return json({ error: 'Chỉ hỗ trợ POST' }, 405);
       if (!env.DB) return json({ error: 'Chưa gắn database D1 (binding DB)' }, 500);
+      if (path.startsWith('/api/auth/')) {
+        try { return await handleAuth(request, env, path); }
+        catch (err) { return json({ error: 'Lỗi máy chủ, bạn thử lại sau nhé' }, 500); }
+      }
+      if (request.method !== 'POST') return json({ error: 'Chỉ hỗ trợ POST' }, 405);
       try {
         if (path === '/api/track') return await track(request, env);
         if (path === '/api/admin/check' || path === '/api/admin/stats') {

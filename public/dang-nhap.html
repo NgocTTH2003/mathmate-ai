@@ -28,7 +28,7 @@
     <ul>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg><span>Lưu tiến độ học và điểm của từng bài luyện tập</span></li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg><span>Xem lại lời giải chi tiết bất cứ lúc nào</span></li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg><span>Miễn phí cho học sinh, không quảng cáo</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg><span>Không quảng cáo, tập trung vào việc học</span></li>
     </ul>
   </aside>
 
@@ -70,7 +70,7 @@
       <!-- ĐĂNG KÝ -->
       <section class="form-panel" id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
         <h1>Tạo tài khoản</h1>
-        <p>Miễn phí, chỉ mất một phút.</p>
+        <p>Chỉ mất một phút.</p>
         <button class="btn btn-google btn-block btn-lg" type="button" data-soon="Đăng ký bằng Google"><span style="width:20px;height:20px"><svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg></span>Tiếp tục với Google</button>
         <div class="divider">hoặc dùng email</div>
         <form id="form-signup" novalidate autocomplete="on">
@@ -148,6 +148,8 @@
 <script>
 (function(){
   var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  // Trang cần quay lại sau khi đăng nhập/đăng ký (chỉ chấp nhận trang nội bộ)
+  var NEXT=(function(){var n=new URLSearchParams(location.search).get('next');return n&&/^[a-z0-9\-]+\.html(#[\w-]*)?$/i.test(n)?n:'tong-quan.html'})();
   // Chuyển tab
   var tabs={login:document.getElementById('tab-login'),signup:document.getElementById('tab-signup')};
   function show(which){
@@ -156,7 +158,7 @@
       tabs[k].setAttribute('aria-selected',on);
       document.getElementById('panel-'+k).hidden=!on;
     });
-    history.replaceState(null,'',which==='signup'?'#dang-ky':'#dang-nhap');
+    history.replaceState(null,'',location.search+(which==='signup'?'#dang-ky':'#dang-nhap'));
   }
   tabs.login.onclick=function(){show('login')};
   tabs.signup.onclick=function(){show('signup')};
@@ -203,22 +205,35 @@
     setErr('grade','');
   })});
 
-  function users(){try{return JSON.parse(localStorage.getItem('mm_users'))||{}}catch(e){return {}}}
+  // Đã đăng nhập thì không cần ở trang này nữa
+  if(MM.getUser()){location.replace(NEXT);return}
 
-  document.getElementById('form-login').addEventListener('submit',function(e){
+  // Hiện lỗi từng ô do máy chủ trả về
+  function serverErrors(map,fields){
+    Object.keys(fields||{}).forEach(function(k){if(map[k])setErr(map[k],fields[k])});
+  }
+  function busy(form,on,label){
+    var b=form.querySelector('button[type="submit"]');b.disabled=on;b.textContent=on?'Đang xử lý…':label;
+  }
+
+  var fl=document.getElementById('form-login');
+  fl.addEventListener('submit',function(e){
     e.preventDefault();
     var ok=setErr('login-email',EMAIL_RE.test(val('login-email'))?'':'Nhập email đúng định dạng, ví dụ ban@gmail.com');
     ok=setErr('login-pw',val('login-pw')?'':'Nhập mật khẩu')&&ok;
     if(!ok)return;
-    // BẢN XEM TRƯỚC: tìm tài khoản đã "đăng ký" trên trình duyệt này
-    var em=val('login-email').toLowerCase(),u=users()[em];
-    if(!u)u={name:em.split('@')[0],email:em,role:'student',grade:'11'};
-    MM.setUser(u);MM.track('login');
-    toast('Đăng nhập thành công (bản xem trước). Đang mở trang của bạn…','ok');
-    setTimeout(function(){location.href='tong-quan.html'},1100);
+    busy(fl,true,'Đăng nhập');
+    MM.api('/api/auth/login',{email:val('login-email'),password:document.getElementById('login-pw').value,remember:fl.querySelector('input[name="remember"]').checked})
+      .then(function(r){
+        if(!r.ok){setErr('login-pw',r.data.error||'Đăng nhập không thành công');return}
+        MM.setUser(r.data.user);MM.track('login');
+        toast('Đăng nhập thành công! Đang mở trang của bạn…','ok');
+        setTimeout(function(){location.href=NEXT},700);
+      },function(){toast('Không kết nối được máy chủ, bạn thử lại nhé.','err')})
+      .then(function(){busy(fl,false,'Đăng nhập')});
   });
 
-  document.getElementById('form-signup').addEventListener('submit',function(e){
+  fs.addEventListener('submit',function(e){
     e.preventDefault();
     var p=document.getElementById('su-pw').value,r=role();
     var g=fs.querySelector('input[name="grade"]:checked');
@@ -230,12 +245,20 @@
     ok=setErr('su-pw',(p.length>=8&&/[a-zA-Z]/.test(p)&&/\d/.test(p))?'':'Mật khẩu cần ít nhất 8 ký tự, có cả chữ và số')&&ok;
     ok=setErr('su-pw2',p&&p===document.getElementById('su-pw2').value?'':'Hai mật khẩu chưa khớp')&&ok;
     if(!ok)return;
-    var u={name:val('su-name'),email:val('su-email').toLowerCase(),role:r};
-    if(r==='student')u.grade=g.value;else{u.school=val('su-school');u.teach=document.getElementById('su-teach').value;u.approved=false}
-    var all=users();all[u.email]=u;try{localStorage.setItem('mm_users',JSON.stringify(all))}catch(e){}
-    MM.setUser(u);MM.track('signup');
-    toast('Tạo tài khoản thành công (bản xem trước, chưa gửi mã xác nhận email).','ok');
-    setTimeout(function(){location.href='tong-quan.html'},1300);
+    var body={name:val('su-name'),email:val('su-email'),password:p,role:r};
+    if(r==='student')body.grade=g.value;else{body.school=val('su-school');body.teach=document.getElementById('su-teach').value}
+    busy(fs,true,'Tạo tài khoản');
+    MM.api('/api/auth/register',body).then(function(res){
+      if(!res.ok){
+        serverErrors({name:'su-name',email:'su-email',password:'su-pw',grade:'grade',school:'su-school',teach:'su-school'},res.data.fields);
+        if(!res.data.fields)toast(res.data.error||'Không tạo được tài khoản','err');
+        return;
+      }
+      MM.setUser(res.data.user);MM.track('signup');
+      toast('Tạo tài khoản thành công! Chào mừng bạn đến với MathMate.','ok');
+      setTimeout(function(){location.href=NEXT},900);
+    },function(){toast('Không kết nối được máy chủ, bạn thử lại nhé.','err')})
+    .then(function(){busy(fs,false,'Tạo tài khoản')});
   });
 })();
 </script>
