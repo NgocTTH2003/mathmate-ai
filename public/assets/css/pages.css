@@ -479,3 +479,10 @@ a.lesson:hover h4{color:var(--violet-2)}
 
 /* Trang chủ: robot MathMate nhỏ trong trạng thái "đang chấm" */
 .g-bot{width:24px;height:24px;margin-right:8px;border-radius:50%;flex-shrink:0}
+
+/* 3 chấm "đang chấm" luôn nhảy, kể cả khi máy tắt hiệu ứng (chuyển động rất nhỏ) */
+@media (prefers-reduced-motion:reduce){
+  .g-run i{animation:gDot 1s ease-in-out infinite!important}
+  .g-run i:nth-child(3){animation-delay:.15s!important}
+  .g-run i:nth-child(4){animation-delay:.3s!important}
+}
