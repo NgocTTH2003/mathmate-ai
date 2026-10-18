@@ -522,3 +522,11 @@ a.lesson:hover h4{color:var(--violet-2)}
 .sound-btn .sb-on{display:none}
 .sound-btn[aria-pressed="true"] .sb-on{display:inline}
 .sound-btn[aria-pressed="true"] .sb-off{display:none}
+
+/* Phần đầu trang chủ: video rộng hơn */
+.hero .wrap{grid-template-columns:.95fr 1.05fr;gap:40px}
+.hero-title{font-size:clamp(2rem,4vw,3.6rem)}
+
+/* Nút loa trên video: to hơn */
+.sound-btn{width:52px;height:52px;right:16px;bottom:16px}
+.sound-btn svg{width:24px;height:24px}
