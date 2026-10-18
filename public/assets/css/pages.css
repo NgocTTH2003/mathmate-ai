@@ -473,7 +473,7 @@ a.lesson:hover h4{color:var(--violet-2)}
 :root{--wrap:1400px}
 /* Trang chủ: tiêu đề đúng 2 dòng, cột chữ rộng hơn cột lời giải một chút */
 .hero .wrap{grid-template-columns:1.15fr .85fr}
-.hero-title{font-size:clamp(2rem,3.5vw,3.3rem)}
+.hero-title{font-size:clamp(2.2rem,4.6vw,4.2rem)}
 .hero-title span{display:block;white-space:nowrap}
 @media (max-width:640px){.hero-title span{white-space:normal}}
 
@@ -485,4 +485,31 @@ a.lesson:hover h4{color:var(--violet-2)}
   .g-run i{animation:gDot 1s ease-in-out infinite!important}
   .g-run i:nth-child(3){animation-delay:.15s!important}
   .g-run i:nth-child(4){animation-delay:.3s!important}
+}
+
+/* Video ở phần đầu trang chủ */
+.story-video{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-2);box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px rgba(124,92,255,.15)}
+.story-video video{display:block;width:100%;aspect-ratio:16/9;background:#0B0822}
+.sound-btn{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(14,11,38,.78);border:1px solid var(--line-2);color:var(--text);font-size:.85rem;font-weight:600;backdrop-filter:blur(6px)}
+.sound-btn:hover{border-color:var(--violet-2)}
+.sound-btn svg{width:18px;height:18px}
+.sound-btn .sb-on{display:none}
+.sound-btn[aria-pressed="true"] .sb-on{display:inline}
+.sound-btn[aria-pressed="true"] .sb-off{display:none}
+.hero-video{align-self:center}
+/* Mục "Tính năng nổi bật" */
+.feature-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.feature-points{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.feature-points li{display:flex;gap:12px;align-items:center;color:var(--text-2)}
+.feature-points li::before{content:"";width:22px;height:22px;flex-shrink:0;border-radius:50%;background:rgba(52,211,163,.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D3A3' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5 10 16.5 18 8'/%3E%3C/svg%3E") center/14px no-repeat}
+.feature-note{margin-top:22px;display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--text-3)}
+@media (max-width:960px){.feature-wrap{grid-template-columns:1fr;gap:28px}}
+
+/* Thanh điều hướng: logo trái, menu chính giữa, tài khoản phải (màn hình rộng) */
+@media (min-width:861px){
+  .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:20px}
+  .brand{justify-self:start}
+  .nav-links{margin-left:0;justify-self:center}
+  .nav-cta{margin-left:0;justify-self:end}
+  .nav-links .has-soon{margin-right:0}
 }

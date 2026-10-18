@@ -26,13 +26,35 @@
   <div class="wrap">
     <div>
       <span class="pill">Dành cho học sinh lớp 9 đến 12</span>
-      <h1 class="hero-title"><span>Đừng lo với việc học Toán khó,</span> <span>cứ để MathMate lo nha</span></h1>
+      <h1 class="hero-title"><span>Đừng lo Toán khó,</span> <span>đã có MathMate lo</span></h1>
       <p class="lead">Học cùng với những bài giảng ngắn gọn, trọng tâm, dễ hiểu, bài luyện tập chấm điểm ngay và lời giải chỉ rõ bạn làm chưa đúng ở bước nào. Đối với giáo viên có thêm công cụ soạn đề, giao bài và chấm bài.</p>
       <div class="hero-actions">
         <a class="btn btn-primary btn-lg" href="#lop-hoc">Chọn lớp để bắt đầu</a>
         <a class="btn btn-ghost btn-lg" href="luyen-tap.html">Làm thử một bài luyện tập</a>
       </div>
       <p class="hero-note">Không cần cài đặt. Học trên máy tính hoặc điện thoại.</p>
+    </div>
+
+    <div class="story-video hero-video">
+      <video id="story-video" autoplay muted loop playsinline disablepictureinpicture preload="auto" aria-label="Video giới thiệu MathMate">
+        <source src="assets/video/trang-chu/video-introduce.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="section feature" id="tinh-nang">
+  <div class="wrap feature-wrap">
+    <div class="section-head" style="margin:0">
+      <span class="pill">Tính năng nổi bật</span>
+      <h2 style="margin-top:14px">Chấm bài như một người thầy</h2>
+      <p>Không chỉ báo đúng hay sai. MathMate xem từng bước biến đổi, khen chỗ bạn làm tốt và chỉ ra chỗ còn thiếu để bạn tự sửa.</p>
+      <ul class="feature-points">
+        <li>Nhận xét riêng cho từng bước</li>
+        <li>Chỉ ra lỗi hay gặp, như thiếu họ nghiệm</li>
+        <li>Gợi ý điểm, thầy cô duyệt lại</li>
+      </ul>
+      <p class="feature-note"><span class="soon">Sắp ra mắt</span> Chấm tự luận đang được hoàn thiện</p>
     </div>
 
     <div class="panel solve" aria-label="Ví dụ MathMate chấm một bài giải">
@@ -188,6 +210,17 @@
   box.classList.add('anim');
   run();
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : run(); });
+})();
+
+// Video đầu trang: luôn tự phát và lặp lại
+(function(){
+  var v=document.getElementById('story-video');
+  if(!v)return;
+  v.muted=true;
+  var play=function(){var p=v.play();if(p&&p.catch)p.catch(function(){});};
+  play();
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)play();});
+  document.addEventListener('click',play,{once:true});
 })();
 </script>
 </body>
